@@ -8,7 +8,10 @@
 
 <span style="color: blue;"><b>Artistic Vision</b></span> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
 
-<img src="./images/nst.jpg" alt="Artistic Vision Header" width="80%"/>
+<p align="center">
+   <img src="./images/nst.jpg" alt="Artistic Vision Header" width="80%"/>
+   <a src="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee">[Source]</a>
+</p>
 
 <details>
    <summary>Repository Vision</summary>
