@@ -8,7 +8,7 @@
 
 
 <p align="center">
-   <img src="./images/nst.jpg" alt="Artistic Vision Header" width="80%"/>
+   <img src="./images/nst.jpg" alt="Artistic Vision Header" width="100%"/>
    <br>
    <a href="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee" target="_blank">Image Source</a>
 </p>
