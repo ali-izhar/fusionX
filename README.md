@@ -4,14 +4,15 @@
 
 # Artistic Vision :art: :eyes:
 
-<hr>
+<u>**Artistic Vision**</u> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
 
-<span style="color: blue;"><b>Artistic Vision</b></span> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
 
 <p align="center">
    <img src="./images/nst.jpg" alt="Artistic Vision Header" width="80%"/>
-   <a src="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee">[Source]</a>
+   <br>
+   <a src="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee" target="_blank">Image Source</a>
 </p>
+
 
 <details>
    <summary>Repository Vision</summary>
@@ -33,16 +34,12 @@
       - [Getting Started](#getting-started)
          - [Prerequisites](#prerequisites)
          - [Installation](#installation)
-      - [Usage](#usage)
       - [Contributing](#contributing)
       - [License](#license)
-      - [Acknowledgements](#acknowledgements)
    </p>
 </details>
 
 ## Features :sparkles:
-
-<hr>
 
 - [x] Upload images from your device
 - [x] Apply styles of famous paintings
@@ -51,8 +48,6 @@
 - [x] Download the stylized image
 
 ## Getting Started :rocket:
-
-<hr>
 
 #### Prerequisites :clipboard:
 
@@ -79,13 +74,3 @@ Contributions are what make the open source community such an amazing place to l
 ## License :page_facing_up:
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
-
-## Acknowledgements
-
-- [Flask](https://flask.palletsprojects.com/en/2.0.x/)
-- [PyTorch](https://pytorch.org/)
-- [Bootstrap](https://getbootstrap.com/)
-- [Kaggle](https://www.kaggle.com/)
-- [Painter by Numbers](https://www.kaggle.com/c/painter-by-numbers)
-- [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576)
-- [Neural Style Transfer](https://pytorch.org/tutorials/advanced/neural_style_tutorial.html)
