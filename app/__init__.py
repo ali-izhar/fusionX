@@ -9,9 +9,11 @@ load_dotenv()
 logging.disable(logging.NOTSET)
 
 def create_app(config_class=Config):
+    logging.info('Creating app...')
     app = Flask(__name__, template_folder='templates', static_folder='static')
     app.config.from_object(config_class)
 
+    logging.info('Registering blueprints...')
     from .views import main_bp
     app.register_blueprint(main_bp)
     
