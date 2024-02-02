@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>scratch</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Hero-Features-icons.css">
-    <link rel="stylesheet" href="assets/css/Lightbox-Gallery-baguetteBox.min.css">
-    <link rel="stylesheet" href="assets/css/Team-Horizontal-images.css">
-</head>
+{% block title %}Vision - Home{% endblock %}
 
-<body style="background: var(--bs-emphasis-color);">
-    <nav class="navbar navbar-expand-md text-light bg-transparent py-3" style="border-style: solid;border-top-style: none;border-right-style: none;border-bottom: 1px solid var(--bs-dark-border-subtle);border-left-style: none;font-weight: bold;" data-bs-theme="dark">
-        <div class="container"><a class="navbar-brand link-body-emphasis d-flex align-items-center" href="index.html"><img src="assets/img/brand.png" style="max-height: 60px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-5">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link active" href="studio.html">Studio</a></li>
-                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="docs.html">Docs</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+{% block content %}
     <section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
         <div class="container h-100">
             <div class="row h-100">
@@ -35,14 +15,14 @@
                             </blockquote>
                             <figcaption class="blockquote-footer">The Artistic Vision Team</figcaption>
                         </figure>
-                        <hr><a class="btn btn-dark btn-lg fs-6 fw-semibold border rounded-pill border-2" role="button" href="studio.html">Go to Studio</a>
+                        <hr><a class="btn btn-dark btn-lg fs-6 fw-semibold border rounded-pill border-2" role="button" href="{{ url_for('main_bp.studio') }}">Go to Studio</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <section>
-        <div style="height: 600px;background: url(&quot;assets/img/header.png&quot;) center / cover no-repeat;"></div>
+        <div style="height: 600px;background: url(&quot;static/img/header.png&quot;) center / cover no-repeat;"></div>
         <div class="container h-100 position-relative" style="top: -50px;">
             <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
                 <div class="col">
@@ -52,7 +32,7 @@
                             <h6 class="text-muted card-subtitle mb-2">Effortless Artistic Makeover</h6>
                             <p class="card-text">Upload your photo, choose an art style, and instantly transform it. Create your masterpiece in seconds!</p>
                         </div>
-                        <div class="card-footer p-4 py-3"><a href="studio.html">Go to Studio&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                        <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.studio') }}">Go to Studio&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
                                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
                                 </svg></a></div>
                     </div>
@@ -64,7 +44,7 @@
                             <h6 class="text-muted card-subtitle mb-2">Diverse Artistic Choices</h6>
                             <p class="card-text">Explore our gallery of styles ranging from classical to modern art. Pick the perfect one for your photo and let the magic happen!</p>
                         </div>
-                        <div class="card-footer p-4 py-3"><a href="gallery.html">Explore Gallery&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                        <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.gallery') }}">Explore Gallery&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
                                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
                                 </svg></a></div>
                     </div>
@@ -76,7 +56,7 @@
                             <h6 class="text-muted card-subtitle mb-2">The Model Behind NST</h6>
                             <p class="card-text">Learn how to store and transfer styles between images using Deep Learning especially with Transfer Learning through the VGG-16 network!</p>
                         </div>
-                        <div class="card-footer p-4 py-3"><a href="docs.html">Learn Now&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                        <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.docs') }}">Learn Now&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
                                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
                                 </svg></a></div>
                     </div>
@@ -88,9 +68,9 @@
     <div class="container">
         <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
             <div class="carousel-inner">
-                <div class="carousel-item active"><img class="w-100 d-block" alt="Slide Image" src="assets/img/carousel1.png"></div>
-                <div class="carousel-item"><img class="w-100 d-block" alt="Slide Image" src="assets/img/carousel1.png"></div>
-                <div class="carousel-item"><img class="w-100 d-block" alt="Slide Image" src="assets/img/carousel1.png"></div>
+                <div class="carousel-item active"><img class="w-100 d-block" alt="Slide Image" src="{{ url_for('static', filename='img/carousel1.png') }}"></div>
+                <div class="carousel-item"><img class="w-100 d-block" alt="Slide Image" src="{{ url_for('static', filename='img/carousel1.png') }}"></div>
+                <div class="carousel-item"><img class="w-100 d-block" alt="Slide Image" src="{{ url_for('static', filename='img/carousel1.png') }}"></div>
             </div>
             <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
             <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button></div>
@@ -106,7 +86,7 @@
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
             <div class="col">
                 <div class="card bg-transparent shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="assets/img/izhar.png" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/izhar.png') }}" style="border-bottom-style: solid;border-bottom-color: #019587;">
                         <div>
                             <h5 class="fw-bold text-success mb-0"><strong>Izhar Ali</strong></h5>
                             <p class="text-success mb-1">Deep Learning</p>
@@ -128,7 +108,7 @@
             </div>
             <div class="col">
                 <div class="card bg-transparent border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="assets/img/ian.jpeg" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/ian.jpeg') }}" style="border-bottom-style: solid;border-bottom-color: #019587;">
                         <div>
                             <h5 class="fw-bold text-success mb-0"><strong>Ian Manahan</strong></h5>
                             <p class="text-success mb-1">Cybersecurity</p>
@@ -150,7 +130,7 @@
             </div>
             <div class="col">
                 <div class="card bg-transparent border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="assets/img/million.jpg" loading="lazy" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/million.jpg') }}" loading="lazy" style="border-bottom-style: solid;border-bottom-color: #019587;">
                         <div>
                             <h5 class="fw-bold text-success mb-0"><strong>Million Haileyesus</strong></h5>
                             <p class="text-success mb-1">The Alchemist</p>
@@ -172,16 +152,4 @@
             </div>
         </div>
     </div>
-    <footer class="text-center bg-dark">
-        <div class="container text-white py-4 py-lg-5">
-            <p class="text-white mb-0">Copyright © 2024 Artistic Vision</p>
-        </div>
-    </footer>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" type="module"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" type="module"></script>
-    <script src="assets/js/Lightbox-Gallery-baguetteBox.min.js"></script>
-    <script src="assets/js/Lightbox-Gallery.js"></script>
-</body>
-
-</html>
+{% endblock %}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Artistic Vision</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Hero-Features-icons.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Lightbox-Gallery-baguetteBox.min.css') }}">
@@ -14,12 +14,12 @@
 
 <body style="background: var(--bs-emphasis-color);">
     <nav class="navbar navbar-expand-md text-light bg-transparent py-3" style="border-style: solid;border-top-style: none;border-right-style: none;border-bottom: 1px solid var(--bs-dark-border-subtle);border-left-style: none;font-weight: bold;" data-bs-theme="dark">
-        <div class="container"><a class="navbar-brand link-body-emphasis d-flex align-items-center" href="{{ url_for('main.index')}}"><img src="{{ url_for('static', filename='img/brand.png') }}" style="max-height: 60px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand link-body-emphasis d-flex align-items-center" href="{{ url_for('main_bp.index')}}"><img src="{{ url_for('static', filename='img/brand.png') }}" style="max-height: 60px;"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-5">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link active" href="{{ url_for('main.studio') }}">Studio</a></li>
-                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="{{ url_for('main.gallery') }}">Gallery</a></li>
-                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="{{} url_for('main.docs') }}">Docs</a></li>
+                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link active" href="{{ url_for('main_bp.studio') }}">Studio</a></li>
+                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="{{ url_for('main_bp.gallery') }}">Gallery</a></li>
+                    <li class="nav-item" style="margin-right: 20px;"><a class="nav-link" href="{{ url_for('main_bp.docs') }}">Docs</a></li>
                 </ul>
             </div>
         </div>
