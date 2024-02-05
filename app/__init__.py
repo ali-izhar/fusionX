@@ -1,12 +1,13 @@
-from flask import Flask, render_template
 from config.config import Config
 from dotenv import load_dotenv
+from flask import Flask, render_template
 import logging
 
 load_dotenv()
 
 # enable logging
-logging.disable(logging.NOTSET)
+logging.basicConfig(level=logging.INFO)
+# logging.disable(logging.NOTSET)
 
 def create_app(config_class=Config):
     logging.info('Creating app...')

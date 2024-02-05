@@ -15,16 +15,22 @@
             </div>
         </div>
     </section>
+
     <div class="container" style="text-align: center;">
         <div class="row">
-            <div class="col-md-6"><img class="img-fluid" style="width: 90%;height: 400px;text-align: center;">
-                <p class="text-center text-white" style="margin-top: 10px;">Content Image</p><input class="border rounded-pill border-1 border-light-subtle" type="file" required="" accept="image/*" style="color: var(--bs-teal);margin: 20px;" name="upload" value="content">
+            <div class="col-md-6">
+                <img id="contentImage" src="{{ url_for('static', filename='img/placeholder1.svg') }}" class="img-fluid" style="width: 90%; height: 400px; text-align: center; object-fit: contain; border-radius: 10px; border: 2px solid var(--bs-dark-border-subtle);">
+                <p class="text-center text-white" style="margin-top: 10px;">Content Image</p>
+                <input class="border rounded-pill border-1 border-light-subtle" type="file" required="" accept="image/*" style="color: var(--bs-teal);margin: 20px;" onchange="previewImage(event, 'contentImage')" name="contentUpload">
             </div>
-            <div class="col-md-6"><img style="width: 90%;height: 400px;text-align: center;">
-                <p class="text-center text-white" style="margin-top: 10px;">Style Image</p><input class="border rounded-pill border-1 border-light-subtle" type="file" required="" accept="image/*" style="color: var(--bs-teal);margin: 20px;" name="upload" value="style">
+            <div class="col-md-6">
+                <img id="styleImage" src="{{ url_for('static', filename='img/placeholder2.svg') }}" class="img-fluid" style="width: 90%; height: 400px; text-align: center; object-fit: contain; border-radius: 10px; border: 2px solid var(--bs-dark-border-subtle);">
+                <p class="text-center text-white" style="margin-top: 10px;">Style Image</p>
+                <input class="border rounded-pill border-1 border-light-subtle" type="file" required="" accept="image/*" style="color: var(--bs-teal);margin: 20px;" onchange="previewImage(event, 'styleImage')" name="styleUpload">
             </div>
         </div>
     </div>
+
     <div class="container" style="text-align: center;margin-top: 50px;margin-bottom: 50px;">
         <div class="row">
             <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." style="width: 90%;height: 100px;padding: 20px;" name="prompt" data-bs-theme="dark"><button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button></div>
