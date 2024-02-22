@@ -19,12 +19,12 @@
     <div class="container" style="text-align: center;">
         <div class="row">
             <div class="col-md-6">
-                <img id="contentImage" src="{{ url_for('static', filename='img/placeholder1.svg') }}" class="img-fluid" style="width: 90%; height: 400px; text-align: center; object-fit: contain; border-radius: 10px; border: 2px solid var(--bs-dark-border-subtle);">
+                <img id="contentImage" class="img-fluid" style="width: 90%; height: 400px; text-align: center; object-fit: contain; border-radius: 10px; border: 2px solid var(--bs-dark-border-subtle);">
                 <p class="text-center text-white" style="margin-top: 10px;">Content Image</p>
                 <input class="border rounded-pill border-1 border-light-subtle" type="file" required="" accept="image/*" style="color: var(--bs-teal);margin: 20px;" onchange="previewImage(event, 'contentImage')" name="contentUpload">
             </div>
             <div class="col-md-6">
-                <img id="styleImage" src="{{ url_for('static', filename='img/placeholder2.svg') }}" class="img-fluid" style="width: 90%; height: 400px; text-align: center; object-fit: contain; border-radius: 10px; border: 2px solid var(--bs-dark-border-subtle);">
+                <img id="styleImage" class="img-fluid" style="width: 90%; height: 400px; text-align: center; object-fit: contain; border-radius: 10px; border: 2px solid var(--bs-dark-border-subtle);">
                 <p class="text-center text-white" style="margin-top: 10px;">Style Image</p>
                 <input class="border rounded-pill border-1 border-light-subtle" type="file" required="" accept="image/*" style="color: var(--bs-teal);margin: 20px;" onchange="previewImage(event, 'styleImage')" name="styleUpload">
             </div>
