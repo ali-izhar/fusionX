@@ -2,9 +2,9 @@
 
 <i>**Note:** This project is still under development.</i>
 
-# Artistic Vision :art: :eyes:
+# Fusion Xperience :fire: :zap:
 
-<u>**Artistic Vision**</u> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
+<u>**FusionX**</u> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
 
 
 <p align="center">
