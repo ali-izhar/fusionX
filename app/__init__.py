@@ -15,8 +15,9 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     logging.info('Registering blueprints...')
-    from .views import main_bp
+    from .views import main_bp, studio_bp
     app.register_blueprint(main_bp)
+    app.register_blueprint(studio_bp)
     
     @app.errorhandler(404)
     def page_not_found(e):

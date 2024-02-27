@@ -1,0 +1,40 @@
+.drop-zone {
+    border: 2px dashed #9FC131;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    width: 90%; /* Adjust width as needed */
+    height: 400px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 20px auto;
+}
+.drop-zone:hover {
+    background-color: rgba(159, 193, 49, 0.1);
+}
+.drop-zone img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.file-input {
+    display: none;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+#mergeButton {
+    display: none; /* Hidden by default */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
