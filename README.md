@@ -1,4 +1,4 @@
-![GitHub contributors](https://img.shields.io/github/contributors/ali-izhar/artistic-vision)
+![GitHub contributors](https://img.shields.io/github/contributors/ali-izhar/fusionX)
 
 <i>**Note:** This project is still under development.</i>
 
