@@ -38,6 +38,26 @@ function previewImage(event, imgId, placeholderId) {
     }
 }
 
+// Function to select a style image from the gallery
+function selectStyleImage(imageUrl) {
+    // Store the image URL in localStorage or pass as query parameter
+    localStorage.setItem('selectedStyleImage', imageUrl);
+    // Redirect to the studio page
+    window.location.href = '/studio';
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const selectedImage = localStorage.getItem('selectedStyleImage');
+    if (selectedImage) {
+        // Set the image source
+        document.getElementById('styleImage').src = selectedImage;
+        // Optionally, clear the selected image from storage
+        localStorage.removeItem('selectedStyleImage');
+        // Hide the placeholder
+        document.getElementById('stylePlaceholder').style.display = 'none';
+    }
+});
+
+
 function checkBothImagesLoaded() {
     const contentImage = document.getElementById('contentImage').src;
     const styleImage = document.getElementById('styleImage').src;

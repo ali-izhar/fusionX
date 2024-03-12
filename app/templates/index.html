@@ -13,7 +13,7 @@
                             <blockquote class="blockquote">
                                 <p class="font-monospace mb-0">Unlock new dimensions of visual creativity. Remix iconic styles, generate beautiful images, and find your artistic voice - where your creativity and our tech converge.</p>
                             </blockquote>
-                            <figcaption class="blockquote-footer">The Artistic Vision Team</figcaption>
+                            <figcaption class="blockquote-footer">The fusionX Team</figcaption>
                         </figure>
                         <hr><a class="btn btn-dark btn-lg fs-6 fw-semibold border rounded-pill border-2" role="button" href="{{ url_for('main_bp.studio') }}">Go to Studio</a>
                     </div>
@@ -68,14 +68,25 @@
     <div class="container">
         <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
             <div class="carousel-inner">
-                <div class="carousel-item active"><img class="w-100 d-block" alt="Slide Image" src="{{ url_for('static', filename='img/carousel1.png') }}"></div>
-                <div class="carousel-item"><img class="w-100 d-block" alt="Slide Image" src="{{ url_for('static', filename='img/carousel1.png') }}"></div>
-                <div class="carousel-item"><img class="w-100 d-block" alt="Slide Image" src="{{ url_for('static', filename='img/carousel1.png') }}"></div>
+                {% for image in carousel_images | batch(2, '&nbsp;') %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <div class="d-flex">
+                            {% for img in image %}
+                                <img class="flex-fill d-block carousel-img" alt="Slide Image" src="{{ url_for('static', filename='img/carousel/' + img) }}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
             <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
-            <div class="carousel-indicators"><button type="button" data-bs-target="#carousel-1" data-bs-slide-to="0" class="active"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="1"></button> <button type="button" data-bs-target="#carousel-1" data-bs-slide-to="2"></button></div>
+            <ol class="carousel-indicators">
+                {% for _ in carousel_images | batch(2, '&nbsp;') %}
+                    <li data-bs-target="#carousel-1" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+                {% endfor %}
+            </ol>
         </div>
     </div>
+    
     <div class="container text-white py-4 py-xl-5">
         <div class="row mb-5">
             <div class="col-md-8 col-xl-6 text-center mx-auto">

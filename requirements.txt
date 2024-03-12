@@ -1,6 +1,10 @@
 Flask==3.0.1
 numpy==1.26.4
+openai==1.13.3
 pillow==10.2.0
 python-dotenv==1.0.1
 requests==2.31.0
 Werkzeug==3.0.1
+torch==2.2.1+cu118
+torchaudio==2.2.1+cu118
+torchvision==0.17.1+cu118
