@@ -3,162 +3,162 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
-                    <div> 
-                        <h1 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px; font-weight: 700;">fusion <span style="color: #A6BC09; font-family: 'Brush Script MT', cursive; font-size:1.5em">X</span>perience</h1>
-                        <figure>
-                            <blockquote class="blockquote">
-                                <p class="font-monospace mb-0">Unlock new dimensions of visual creativity. Remix iconic styles, generate beautiful images, and find your artistic voice - where your creativity and our tech converge.</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">The fusionX Team</figcaption>
-                        </figure>
-                        <hr><a class="btn btn-dark btn-lg fs-6 fw-semibold border rounded-pill border-2" role="button" href="{{ url_for('main_bp.studio') }}">Go to Studio</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div style="height: 600px;background: url(&quot;static/img/header.png&quot;) center / cover no-repeat;"></div>
-        <div class="container h-100 position-relative" style="top: -50px;">
-            <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
-                <div class="col">
-                    <div class="card" style="background: var(--bs-gray-100);text-align: center;">
-                        <div class="card-body pt-5 p-4">
-                            <h4 class="card-title" style="font-weight: bold;color: #A6BC09;">Instant Style Transfer</h4>
-                            <h6 class="text-muted card-subtitle mb-2">Effortless Artistic Makeover</h6>
-                            <p class="card-text">Upload your photo, choose an art style, and instantly transform it. Create your masterpiece in seconds!</p>
-                        </div>
-                        <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.studio') }}">Go to Studio&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
-                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
-                                </svg></a></div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="background: var(--bs-gray-100);text-align: center;">
-                        <div class="card-body pt-5 p-4">
-                            <h4 class="card-title" style="font-weight: bold;color: #A6BC09;">Extensive Style Gallery</h4>
-                            <h6 class="text-muted card-subtitle mb-2">Diverse Artistic Choices</h6>
-                            <p class="card-text">Explore our gallery of styles ranging from classical to modern art. Pick the perfect one for your photo and let the magic happen!</p>
-                        </div>
-                        <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.gallery') }}">Explore Gallery&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
-                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
-                                </svg></a></div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="background: var(--bs-gray-100);text-align: center;">
-                        <div class="card-body pt-5 p-4">
-                            <h4 class="card-title" style="font-weight: bold;color: #A6BC09;">Discover NST Intuitions</h4>
-                            <h6 class="text-muted card-subtitle mb-2">The Model Behind NST</h6>
-                            <p class="card-text">Learn how to store and transfer styles between images using Deep Learning especially with Transfer Learning through the VGG-16 network!</p>
-                        </div>
-                        <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.docs') }}">Learn Now&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
-                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
-                                </svg></a></div>
-                    </div>
-                </div>
-            </div>
-            <hr style="color: #CCEA8D;">
-        </div>
-    </section>
-    <div class="container">
-        <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
-            <div class="carousel-inner">
-                {% for image in carousel_images | batch(2, '&nbsp;') %}
-                    <div class="carousel-item {% if loop.first %}active{% endif %}">
-                        <div class="d-flex">
-                            {% for img in image %}
-                                <img class="flex-fill d-block carousel-img" alt="Slide Image" src="{{ url_for('static', filename='img/carousel/' + img) }}">
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
-            <ol class="carousel-indicators">
-                {% for _ in carousel_images | batch(2, '&nbsp;') %}
-                    <li data-bs-target="#carousel-1" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
-                {% endfor %}
-            </ol>
-        </div>
-    </div>
-    
-    <div class="container text-white py-4 py-xl-5">
-        <div class="row mb-5">
-            <div class="col-md-8 col-xl-6 text-center mx-auto">
-                <h2><strong>Fusion<span style="color: #A6BC09; font-family: 'Brush Script MT', cursive; font-size:1.5em">X</span> Team</strong></h2>
-                <p class="text-warning w-lg-50"><em>Deep learning and Cybersecurity</em></p>
-            </div>
-        </div>
-        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
-            <div class="col">
-                <div class="card bg-transparent shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/izhar.png') }}" style="border-bottom-style: solid;border-bottom-color: #019587;">
-                        <div>
-                            <h5 class="fw-bold text-success mb-0"><strong>Izhar Ali</strong></h5>
-                            <p class="text-success mb-1">Deep Learning</p>
-                            <ul class="list-inline fs-6 text-warning w-100 mb-0">
-                                <li class="list-inline-item"><a href="https://www.linkedin.com/in/ali-izhar/" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
-                                <li class="list-inline-item"><a href="https://github.com/ali-izhar" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-transparent border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/ian.jpeg') }}" style="border-bottom-style: solid;border-bottom-color: #019587;">
-                        <div>
-                            <h5 class="fw-bold text-success mb-0"><strong>Ian Manahan</strong></h5>
-                            <p class="text-success mb-1">Cybersecurity</p>
-                            <ul class="list-inline fs-6 text-warning w-100 mb-0">
-                                <li class="list-inline-item"><a href="https://www.linkedin.com/in/ian-manahan/" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
-                                <li class="list-inline-item"><a href="https://github.com/Manafist17" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-transparent border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/million.jpg') }}" loading="lazy" style="border-bottom-style: solid;border-bottom-color: #019587;">
-                        <div>
-                            <h5 class="fw-bold text-success mb-0"><strong>Million Haileyesus</strong></h5>
-                            <p class="text-success mb-1">The Alchemist</p>
-                            <ul class="list-inline fs-6 text-warning w-100 mb-0">
-                                <li class="list-inline-item"><a href="https://www.linkedin.com/in/million-haileyesus/" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
-                                <li class="list-inline-item"><a href="https://github.com/million-haileyesus" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card bg-transparent border-0 shadow-none">
-                    <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/mike.jpg') }}" loading="lazy" style="border-bottom-style: solid;border-bottom-color: #019587;">
-                        <div>
-                            <h5 class="fw-bold text-success mb-0"><strong>Michael Loughrin</strong></h5>
-                            <p class="text-success mb-1">GPU Programming</p>
-                            <ul class="list-inline fs-6 text-warning w-100 mb-0">
-                                <li class="list-inline-item"><a href="https://www.linkedin.com/in/michael-loughrin-078101199/" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
-                                <li class="list-inline-item"><a href="https://github.com/log-Mike" target="_blank">
-                                    <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
-                            </ul>
-                        </div>
-                    </div>
+<section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div> 
+                    <h1 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px; font-weight: 700;">fusion <span style="color: #A6BC09; font-family: 'Brush Script MT', cursive; font-size:1.5em">X</span>perience</h1>
+                    <figure>
+                        <blockquote class="blockquote">
+                            <p class="font-monospace mb-0">Unlock new dimensions of visual creativity. Remix iconic styles, generate beautiful images, and find your artistic voice - where your creativity and our tech converge.</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">The fusionX Team</figcaption>
+                    </figure>
+                    <hr><a class="btn btn-dark btn-lg fs-6 fw-semibold border rounded-pill border-2" role="button" href="{{ url_for('main_bp.studio') }}">Go to Studio</a>
                 </div>
             </div>
         </div>
     </div>
+</section>
+<section>
+    <div style="height: 600px;background: url(&quot;static/img/header.png&quot;) center / cover no-repeat;"></div>
+    <div class="container h-100 position-relative" style="top: -50px;">
+        <div class="row gy-5 gy-lg-0 row-cols-1 row-cols-md-2 row-cols-lg-3">
+            <div class="col">
+                <div class="card" style="background: var(--bs-gray-100);text-align: center;">
+                    <div class="card-body pt-5 p-4">
+                        <h4 class="card-title" style="font-weight: bold;color: #A6BC09;">Instant Style Transfer</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Effortless Artistic Makeover</h6>
+                        <p class="card-text">Upload your photo, choose an art style, and instantly transform it. Create your masterpiece in seconds!</p>
+                    </div>
+                    <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.studio') }}">Go to Studio&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
+                            </svg></a></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="background: var(--bs-gray-100);text-align: center;">
+                    <div class="card-body pt-5 p-4">
+                        <h4 class="card-title" style="font-weight: bold;color: #A6BC09;">Extensive Style Gallery</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Diverse Artistic Choices</h6>
+                        <p class="card-text">Explore our gallery of styles ranging from classical to modern art. Pick the perfect one for your photo and let the magic happen!</p>
+                    </div>
+                    <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.gallery') }}">Explore Gallery&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
+                            </svg></a></div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="background: var(--bs-gray-100);text-align: center;">
+                    <div class="card-body pt-5 p-4">
+                        <h4 class="card-title" style="font-weight: bold;color: #A6BC09;">Discover NST Intuitions</h4>
+                        <h6 class="text-muted card-subtitle mb-2">The Model Behind NST</h6>
+                        <p class="card-text">Learn how to store and transfer styles between images using Deep Learning especially with Transfer Learning through the VGG-16 network!</p>
+                    </div>
+                    <div class="card-footer p-4 py-3"><a href="{{ url_for('main_bp.docs') }}">Learn Now&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"></path>
+                            </svg></a></div>
+                </div>
+            </div>
+        </div>
+        <hr style="color: #CCEA8D;">
+    </div>
+</section>
+<div class="container">
+    <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
+        <div class="carousel-inner">
+            {% for image in carousel_images | batch(2, '&nbsp;') %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="d-flex">
+                        {% for img in image %}
+                            <img class="flex-fill d-block carousel-img" alt="Slide Image" src="{{ url_for('static', filename='img/carousel/' + img) }}">
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
+        <ol class="carousel-indicators">
+            {% for _ in carousel_images | batch(2, '&nbsp;') %}
+                <li data-bs-target="#carousel-1" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+
+<div class="container text-white py-4 py-xl-5">
+    <div class="row mb-5">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <h2><strong>Fusion<span style="color: #A6BC09; font-family: 'Brush Script MT', cursive; font-size:1.5em">X</span> Team</strong></h2>
+            <p class="text-warning w-lg-50"><em>Deep learning and Cybersecurity</em></p>
+        </div>
+    </div>
+    <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="col">
+            <div class="card bg-transparent shadow-none">
+                <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/team/izhar.png') }}" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div>
+                        <h5 class="fw-bold text-success mb-0"><strong>Izhar Ali</strong></h5>
+                        <p class="text-success mb-1">Deep Learning</p>
+                        <ul class="list-inline fs-6 text-warning w-100 mb-0">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/ali-izhar/" target="_blank">
+                                <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/ali-izhar" target="_blank">
+                                <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-transparent border-0 shadow-none">
+                <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/team/ian.jpeg') }}" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div>
+                        <h5 class="fw-bold text-success mb-0"><strong>Ian Manahan</strong></h5>
+                        <p class="text-success mb-1">Cybersecurity</p>
+                        <ul class="list-inline fs-6 text-warning w-100 mb-0">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/ian-manahan/" target="_blank">
+                                <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/Manafist17" target="_blank">
+                                <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-transparent border-0 shadow-none">
+                <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/team/million.jpg') }}" loading="lazy" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div>
+                        <h5 class="fw-bold text-success mb-0"><strong>Million Haileyesus</strong></h5>
+                        <p class="text-success mb-1">The Alchemist</p>
+                        <ul class="list-inline fs-6 text-warning w-100 mb-0">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/million-haileyesus/" target="_blank">
+                                <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/million-haileyesus" target="_blank">
+                                <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-transparent border-0 shadow-none">
+                <div class="card-body d-flex align-items-center p-0"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="130" height="130" src="{{ url_for('static', filename='img/team/mike.jpg') }}" loading="lazy" style="border-bottom-style: solid;border-bottom-color: #019587;">
+                    <div>
+                        <h5 class="fw-bold text-success mb-0"><strong>Michael Loughrin</strong></h5>
+                        <p class="text-success mb-1">GPU Programming</p>
+                        <ul class="list-inline fs-6 text-warning w-100 mb-0">
+                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/michael-loughrin-078101199/" target="_blank">
+                                <img src="{{ url_for('static', filename='img/linkedin.svg') }}" height="25" width="25" alt="linkedin"></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/log-Mike" target="_blank">
+                                <img src="{{ url_for('static', filename='img/github.svg') }}" height="25" width="25" alt="github"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

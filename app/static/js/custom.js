@@ -81,6 +81,9 @@ document.querySelectorAll('.drop-zone').forEach(dropZone => {
 });
 
 function mergeImages() {
+    // Display a loading indicator
+    document.getElementById('loader-overlay').style.display = 'block';
+
     const contentImage = document.getElementById('contentImage').src;
     const styleImage = document.getElementById('styleImage').src;
 
@@ -93,10 +96,30 @@ function mergeImages() {
     })
     .then(response => response.json())
     .then(data => {
-        // The src attribute of the img tag can handle base64 encoded images
-        document.getElementById('resultImage').src = data.result;
-        document.getElementById('resultImage').style.display = 'block';
-    }).catch(error => {
+        // Hide loading indicator
+        document.getElementById('loader-overlay').style.display = 'none';
+
+        // Use LocalStorage to pass the image to result.html
+        localStorage.setItem('resultImage', data.result);
+
+        // Navigate to result.html
+        window.location.href = '/studio/result';
+    })
+    .catch(error => {
         console.error('Error:', error);
+        // Hide loading indicator and possibly show an error message
+        document.getElementById('loader-overlay').style.display = 'none';
     });
 }
+
+window.onload = function() {
+    // Retrieve the image data from LocalStorage
+    const resultImage = localStorage.getItem('resultImage');
+    if (resultImage) {
+        document.getElementById('resultImage').src = resultImage;
+        document.getElementById('resultImage').style.display = 'block';
+
+        // Optionally, clear the image data from LocalStorage after displaying it
+        localStorage.removeItem('resultImage');
+    }
+};

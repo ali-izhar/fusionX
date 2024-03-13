@@ -64,12 +64,12 @@
 
 /* STUDIO PAGE */
 .drop-zone {
-    border: 2px dashed rgba(159, 193, 49, 0.5);
+    border: 2px solid rgba(159, 193, 49, 0.5);
     border-radius: 10px;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    width: 90%;
+    width: 80%;
     height: 400px;
     display: flex;
     justify-content: center;
@@ -114,12 +114,54 @@
     margin-top: 20px;
 }
 #mergeButton {
-    display: none; /* Hidden by default */
-    padding: 10px 20px;
-    margin: 20px;
-    font-size: 16px;
+    display: none;
+    border: none;
+    width: 12em;
+    height: 4em;
+    margin: 30px 0;
+    border-radius: 3em;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #1C1A1C;
     cursor: pointer;
+    transition: all 450ms ease-in-out;
+  }
+.sparkle {
+    fill: #AAAAAA;
+    transition: all 800ms ease;
 }
-#mergeButton:hover {
-    background-color: rgba(159, 193, 49, 0.1);
+.text {
+    font-weight: 600;
+    color: #AAAAAA;
+    font-size: medium;
+}
+.btn:hover {
+    background: linear-gradient(0deg,#A47CF3,#683FEA);
+    box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+    inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+    0px 0px 0px 4px rgba(255, 255, 255, 0.2),
+    0px 0px 180px 0px #9917FF;
+    transform: translateY(-2px);
+}
+.btn:hover .text {
+    color: white;
+}
+.btn:hover .sparkle {
+    fill: white;
+    transform: scale(1.2);
+}
+
+/* MERGED PAGE */
+.merged-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.merged-image-container img {
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    transition: 0.2s;
 }

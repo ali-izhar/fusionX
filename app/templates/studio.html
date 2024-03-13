@@ -2,53 +2,75 @@
 
 {% block title %}Studio{% endblock %}
 
-{% block content %}
-    <section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
-                    <div>
-                        <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Let the Fun Begin!</h2>
-                        <hr>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{% block loader %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/loader.css') }}">
+<div class="loader-overlay" id="loader-overlay" style="display: none;">
+    <div class="loader">
+        <div class="cell d-0"></div>
+        <div class="cell d-1"></div>
+        <div class="cell d-2"></div>
+        <div class="cell d-1"></div>
+        <div class="cell d-2"></div>
+        <div class="cell d-2"></div>
+        <div class="cell d-3"></div>
+        <div class="cell d-3"></div>
+        <div class="cell d-4"></div>
+    </div>
+</div>
+{% endblock %}
 
-    <div class="container" style="text-align: center;">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="drop-zone" onclick="triggerFileInput('contentUpload')">
-                    <img id="contentImage" class="img-fluid" style="border: none;">
-                    <p id="contentPlaceholder" class="text-center text-white placeholder-text">Click or Drag & Drop to Upload Content Image</p>
-                </div>
-                <input id="contentUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'contentImage', 'contentPlaceholder')" name="contentUpload">
-                <div class="studio-text-form">
-                    <form action="{{ url_for('studio_bp.generate') }}" method="post">
-                        <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
-                            <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
-                        </div>
-                    </form>
+{% block content %}
+<section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div>
+                    <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Let the Fun Begin!</h2>
+                    <hr>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="drop-zone" onclick="triggerFileInput('styleUpload')">
-                    <img id="styleImage" class="img-fluid" style="border: none;">
-                    <p id="stylePlaceholder" class="text-center text-white placeholder-text">Click or Drag & Drop to Upload Style Image</p>
-                </div>
-                <input id="styleUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'styleImage', 'stylePlaceholder')" name="styleUpload">
-                <div class="studio-text-form">
-                    <form action="{{ url_for('studio_bp.generate') }}" method="post">
-                        <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" data-bs-theme="dark">
-                            <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="button-container">
-            <button class="btn btn-dark btn-lg fs-6 fw-semibold border rounded-pill border-2" id="mergeButton" onclick="mergeImages()">Merge Images</button>
         </div>
     </div>
+</section>
+
+<div class="container" style="text-align: center;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="drop-zone" onclick="triggerFileInput('contentUpload')">
+                <img id="contentImage" class="img-fluid" style="border: none;">
+                <p id="contentPlaceholder" class="text-center text-white placeholder-text">Click or Drag & Drop to Upload Content Image</p>
+            </div>
+            <input id="contentUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'contentImage', 'contentPlaceholder')" name="contentUpload">
+            <div class="studio-text-form">
+                <form action="{{ url_for('studio_bp.generate') }}" method="post">
+                    <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
+                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="drop-zone" onclick="triggerFileInput('styleUpload')">
+                <img id="styleImage" class="img-fluid" style="border: none;">
+                <p id="stylePlaceholder" class="text-center text-white placeholder-text">Click or Drag & Drop to Upload Style Image</p>
+            </div>
+            <input id="styleUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'styleImage', 'stylePlaceholder')" name="styleUpload">
+            <div class="studio-text-form">
+                <form action="{{ url_for('studio_bp.generate') }}" method="post">
+                    <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" data-bs-theme="dark">
+                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="btn" id="mergeButton" onclick="mergeImages()">
+            <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
+                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+            </svg>
+            <span class="text">Merge Images</span>
+        </button>
+    </div>
+</div>
 {% endblock %}

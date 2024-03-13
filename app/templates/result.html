@@ -3,24 +3,43 @@
 {% block title %}Merger{% endblock %}
 
 {% block content %}
-    <section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
-                    <div>
-                        <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Merged Style!</h2>
-                        <hr>
-                    </div>
+<section class="py-4 py-xl-5" style="color: var(--bs-body-bg);">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
+                <div>
+                    <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Merged Style!</h2>
+                    <hr>
                 </div>
             </div>
         </div>
-    </section>
-
-    <div class="image-container">
-        {% if image_path %}
-        <img src="{{ url_for('static', filename=image_path) }}" alt="Result Image">
-        {% else %}
-            <p>No image to display.</p>
-        {% endif %}
     </div>
+</section>
+
+<section>
+    <div class="merged-image-container">
+        <img id="resultImage" class="img-fluid" style="display: none; border: none;">
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Retrieve the merged image data from local storage
+        const resultImageData = localStorage.getItem('resultImage');
+    
+        // Check if there is image data
+        if (resultImageData) {
+            const imgElement = document.getElementById('resultImage');
+            imgElement.src = resultImageData;
+            imgElement.style.display = 'block';
+    
+            // Clear the image data from local storage to avoid reuse
+            localStorage.removeItem('resultImage');
+        } else {
+            // Optionally, handle the case where no image data is found
+            console.error('No image data found in local storage.');
+        }
+    });
+</script>
 {% endblock %}

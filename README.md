@@ -8,7 +8,7 @@
 
 
 <p align="center">
-   <img src="./images/nst.jpg" alt="Artistic Vision Header" width="100%"/>
+   <img src="./app/static/img/nst.jpg" alt="fusionX Header" width="100%"/>
    <br>
    <a href="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee" target="_blank">Image Source</a>
 </p>
@@ -30,7 +30,7 @@
    <summary>Table of Contents</summary>
    <p>
 
-   - [Artistic Vision](#artistic-vision-art-eyes)
+   - [FusionX](#artistic-vision-art-eyes)
       - [Features](#features)
       - [Getting Started](#getting-started)
          - [Prerequisites](#prerequisites)
