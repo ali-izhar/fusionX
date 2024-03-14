@@ -2,7 +2,7 @@
 .carousel-img {
     width: 50%;
     height: 400px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
     margin: 0 10px;
     cursor: pointer; 

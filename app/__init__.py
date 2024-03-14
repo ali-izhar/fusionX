@@ -6,8 +6,8 @@ import logging
 load_dotenv()
 
 # enable logging
-logging.basicConfig(level=logging.INFO)
-# logging.disable(logging.NOTSET)
+logging.disable(logging.NOTSET)
+
 
 def create_app(config_class=Config):
     logging.info('Creating app...')

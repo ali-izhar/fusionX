@@ -65,27 +65,38 @@
         <hr style="color: #CCEA8D;">
     </div>
 </section>
+
 <div class="container">
     <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
         <div class="carousel-inner">
-            {% for image in carousel_images | batch(2, '&nbsp;') %}
+            {% for image in carousel_images | batch(3, '&nbsp;') %}
                 <div class="carousel-item {% if loop.first %}active{% endif %}">
                     <div class="d-flex">
                         {% for img in image %}
-                            <img class="flex-fill d-block carousel-img" alt="Slide Image" src="{{ url_for('static', filename='img/carousel/' + img) }}">
+                            <img class="flex-fill d-block carousel-img" alt="Slide Image" src="{{ url_for('static', filename='img/carousel/' + img) }}" style="width:33.33%;">
                         {% endfor %}
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
+        <div>
+            <a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
         <ol class="carousel-indicators">
-            {% for _ in carousel_images | batch(2, '&nbsp;') %}
+            {% for _ in carousel_images | batch(3, '&nbsp;') %}
                 <li data-bs-target="#carousel-1" data-bs-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
             {% endfor %}
         </ol>
     </div>
 </div>
+
 
 <div class="container text-white py-4 py-xl-5">
     <div class="row mb-5">
