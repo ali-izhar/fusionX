@@ -80,30 +80,17 @@ def save_image(img, img_path):
     cv.imwrite(img_path, img)
 
 
-def save_and_maybe_display(optimizing_img, img_id, config):
+def save_and_maybe_display(optimizing_img, img_id, iters, img_path):
     """Save the generated image.
     If saving_freq == -1, only the final output image will be saved.
     Else, intermediate images can be saved too.
     """
-    saving_freq = config.get('saving_freq', -1)
+    saving_freq = -1
     out_img = optimizing_img.squeeze(axis=0).to('cpu').detach().numpy()
     out_img = np.moveaxis(out_img, 0, 2)
 
-    if img_id == config['num_iterations'] - 1 or saving_freq == -1 or (img_id % saving_freq == 0):
+    if img_id == iters - 1 or saving_freq == -1 or (img_id % saving_freq == 0):
         dump_img = np.copy(out_img)
         dump_img += np.array(IMAGENET_MEAN_255).reshape((1, 1, 3))
         dump_img = np.clip(dump_img, 0, 255).astype('uint8')
-        save_image(dump_img, os.path.join(config['output_img_dir'], config['output_img_name']))
-
-
-def setup_paths(config):
-    """Make paths absolute and ensure the output directory exists."""
-    config['content_images_dir'] = os.path.abspath(config['content_images_dir'])
-    config['style_images_dir'] = os.path.abspath(config['style_images_dir'])
-    config['output_img_dir'] = os.path.abspath(config['output_img_dir'])
-    os.makedirs(config['output_img_dir'], exist_ok=True)
-
-    # Construct specific file paths
-    config['content_img_path'] = os.path.join(config['content_images_dir'], config['content_img_name'])
-    config['style_img_path'] = os.path.join(config['style_images_dir'], config['style_img_name'])
-    return config
+        save_image(dump_img, img_path)

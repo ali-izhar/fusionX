@@ -1,19 +1,23 @@
+// Select a content image from the gallery
 function triggerFileInput(id) {
     document.getElementById(id).click();
 }
 
+// Handle the drag over event
 function dragOverEvent(event) {
     event.preventDefault();
     event.stopPropagation();
     event.target.closest('.drop-zone').style.backgroundColor = '#f0f0f0';
 }
 
+// Handle the drag leave event
 function dragLeaveEvent(event) {
     event.preventDefault();
     event.stopPropagation();
     event.target.closest('.drop-zone').style.backgroundColor = '';
 }
 
+// Handle the drop event
 function dropEvent(event, imgId, placeholderId) {
     event.preventDefault();
     event.stopPropagation();
@@ -25,6 +29,7 @@ function dropEvent(event, imgId, placeholderId) {
     }
 }
 
+// Preview the selected image
 function previewImage(event, imgId, placeholderId) {
     const file = event.target.files[0];
     if (file) {
@@ -38,7 +43,7 @@ function previewImage(event, imgId, placeholderId) {
     }
 }
 
-// Function to select a style image from the gallery
+// Select a style image from the gallery
 function selectStyleImage(imageUrl) {
     // Store the image URL in localStorage or pass as query parameter
     localStorage.setItem('selectedStyleImage', imageUrl);
@@ -57,19 +62,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
+// Check if both images are loaded
 function checkBothImagesLoaded() {
     const contentImage = document.getElementById('contentImage').src;
     const styleImage = document.getElementById('styleImage').src;
 
     // Check if both images are not just placeholders anymore
     if (contentImage && styleImage && contentImage.length > 0 && styleImage.length > 0) {
-        document.getElementById('mergeButton').style.display = 'block';
+        document.getElementById('mergeBlock').style.display = 'block';
     } else {
-        document.getElementById('mergeButton').style.display = 'none';
+        document.getElementById('mergeBlock').style.display = 'none';
     }
 }
 
+// Add event listeners for drag and drop
 document.querySelectorAll('.drop-zone').forEach(dropZone => {
     dropZone.addEventListener('dragover', dragOverEvent);
     dropZone.addEventListener('dragleave', dragLeaveEvent);
@@ -81,25 +87,49 @@ document.querySelectorAll('.drop-zone').forEach(dropZone => {
 });
 
 function mergeImages() {
+    // Prevent the form from submitting if called on form submission
+    event.preventDefault();
+
     // Display a loading indicator
     document.getElementById('loader-overlay').style.display = 'block';
 
     const contentImage = document.getElementById('contentImage').src;
     const styleImage = document.getElementById('styleImage').src;
 
+    // Retrieve the values from the settings form inputs
+    const nstIterations = document.getElementById('nstIterations').value;
+    const nstContentWeight = document.getElementById('nstContentWeight').value;
+    const nstStyleWeight = document.getElementById('nstStyleWeight').value;
+    const nstTotalVariationWeight = document.getElementById('nstTotalVariationWeight').value;
+    const nstImageHeight = document.getElementById('nstImageHeight').value;
+    const outputFileName = document.getElementById('outputFileName').value;
+    const outputImageFormat = document.getElementById('outputImageFormat').value;
+
+    // Construct the settings object
+    const settings = {
+        nstIterations,
+        nstContentWeight,
+        nstStyleWeight,
+        nstTotalVariationWeight,
+        nstImageHeight,
+        outputFileName,
+        outputImageFormat
+    };
+
+    // Include the settings in the fetch request
     fetch('/studio/merge', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ contentImage, styleImage })
+        body: JSON.stringify({ contentImage, styleImage, settings }) // Include settings in the payload
     })
     .then(response => response.json())
     .then(data => {
         // Hide loading indicator
         document.getElementById('loader-overlay').style.display = 'none';
 
-        // Use LocalStorage to pass the image to result.html
+        // Use LocalStorage or another method to pass the image to result.html
         localStorage.setItem('resultImage', data.result);
 
         // Navigate to result.html
@@ -111,6 +141,24 @@ function mergeImages() {
         document.getElementById('loader-overlay').style.display = 'none';
     });
 }
+
+
+
+// Display the result image
+document.addEventListener('DOMContentLoaded', (event) => {
+    const resultImageData = localStorage.getItem('resultImage');
+    if (resultImageData) {
+        const imageElement = document.getElementById('mergedImage');
+        imageElement.src = resultImageData;
+        imageElement.style.display = 'block'; // Show the image
+    } else {
+        console.error('No result image data found in localStorage.');
+        // Handle the case where there is no image data. Maybe display a message?
+    }
+    // Clear the data from localStorage
+    localStorage.removeItem('resultImage');
+});
+
 
 window.onload = function() {
     // Retrieve the image data from LocalStorage

@@ -20,85 +20,113 @@
         <hr>
     </div>
 </div>
-<div class="container text-white">
+
+<div class="container text-light doc-container">
     <div style="text-align: left;">
-        <h1 class="fs-3 fw-bolder" style="text-align: left;">Transfer Learning</h1>
-        <p>NST uses a previously trained convolutional network, and builds on top of that. The idea of using a network trained on a different task and applying it to a new task is called transfer learning.&nbsp;We will use VGG-19, a 19-layer version of the VGG network. This model has already been trained on the very large ImageNet database, and has learned to recognize a variety of low level features (at the shallower layers) and high level features (at the deeper layers).</p>
+        <!-- Toggle Button -->
+        <div><h1 class="fs-3 fw-bolder" style="text-align: left;" data-bs-toggle="collapse" data-bs-target="#collapseTransferLearning">1 - Transfer Learning</h1></div>
+
+        <!-- Collapsible Element -->
+            <div class="text-light">
+                <p>NST uses a previously trained convolutional network, and builds on top of that. The idea of using a network trained on a different task and applying it to a new task is called transfer learning.&nbsp;We will use VGG-19, a 19-layer version of the VGG network. This model has already been trained on the very large ImageNet database, and has learned to recognize a variety of low level features (at the shallower layers) and high level features (at the deeper layers).</p>
+                <h1 class="fs-5 fw-bolder" style="text-align: left;">1.1 - NST Algorithm</h1>
+                <p>Build the Neural Style Transfer (NST) algorithm in three steps:</p>
+                <ul>
+                    <li>Build the content cost function \(J_{content}(C,G)\)</li>
+                    <li>Build the style cost function \(J_{style}(S,G)\)</li>
+                    <li>Put it all together to get \(J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)\)</li>
+                </ul>
+            </div>
         <hr style="color: #DBF227;">
-        <h1 class="fs-3 fw-bolder" style="text-align: left;">NST Algorithm</h1>
-        <p>Build the Neural Style Transfer (NST) algorithm in three steps:</p>
-        <ul>
-            <li>Build the content cost function \(J_{content}(C,G)\)</li>
-            <li>Build the style cost function \(J_{style}(S,G)\)</li>
-            <li>Put it all together to get \(J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)\)</li>
-        </ul>
+    </div>
+</div>
+
+<div class="container text-light doc-container">
+    <!-- Toggle Container -->
+    <div><h1 class="fs-3 fw-bolder" style="text-align: left;" data-bs-toggle="collapse" data-bs-target="#nstWorkFlow">2 - NST Workflow</h1></div>
+
+    <!-- Collapsible Element -->
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col" style="border-top-style: none;border-top-color: #019587;border-right-style: none;border-right-color: #019587;border-bottom-style: none;border-bottom-color: #019587;border-left-style: none;border-left-color: #019587;">
+                <div class="text-start" style="color: #D6D58E;border-radius: 10px;max-width: 90%;border-style: none;border-top-style: none;border-right-style: none;border-bottom-style: none;border-bottom-color: #019587;border-left-style: none;"><code style="color: #D6D58E;border-radius: 10px;border-width: 1px;border-color: #019587;border-top-color: #019587;border-right-color: #019587;border-bottom-color: #019587;border-left-style: none;"><br><br><strong>def train_step(generated_image):</strong>&nbsp; <br>&nbsp; &nbsp; with tf.GradientTape() as tape:<br><br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute a_G as the vgg_model_outputs</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; a_G = vgg_model_outputs(generated_image)<br><br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute the style cost</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; J_style = compute_style_cost(a_S, a_G, STYLE_LAYERS)<br>&nbsp; &nbsp;<br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute the content cost</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; J_content = compute_content_cost(a_C, a_G)<br>&nbsp;<br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute the total cost</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; J = total_cost(J_content, J_style, alpha, beta)<br>&nbsp; <br>&nbsp; grad = tape.gradient(J, generated_image)<br>&nbsp; optimizer.apply_gradients([(grad, generated_image)])<br><br>&nbsp; generated_image.assign(clip_0_1(generated_image))<br>&nbsp; return J<br><br>generated_image = tf.Variable(generated_image)<br><br>epochs = 2501<br>for i in range(epochs):<br>&nbsp; train_step(generated_image)</code></div>
+            </div>
+            <div class="col">
+                <div class="text-center"><img class="rounded w-100 h-100 fit-cover" style="min-height: 300px;max-width: 90%;border-radius: 10px;" src="{{ url_for('static', filename='img/nn.png') }}" width="636" height="300" loading="lazy">
+                    <p class="text-light"><br><strong>Figure 3:</strong> <em>NST Architecture Workflow</em></p>
+                </div>
+            </div>
+        </div>
+    <hr style="color: #DBF227;">
+</div>
+
+
+<div class="container text-light doc-container">
+        <!-- Toggle Button -->
+        <div><h1 class="fs-3 fw-bolder" style="text-align: left; cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#collapseContentCost">3 - Content Cost Function <span class="arrow">&#x25BC;</span></h1></div>
+
+        <!-- Collapsible Element -->
+        <div id="collapseContentCost" class="collapse">
+            <div class="text-light">
+                <p>One goal we should aim for when performing NST is for the content in generated image G to match the content of image C. A method to achieve this is to calculate the content cost function, which will be defined as:<br><br>\(J_{content}(C,G) =&nbsp;\frac{1}{4 \times n_H \times n_W \times n_C}\sum _{ \text{all entries}} (a^{(C)} - a^{(G)})^2\)</p>
+                <ul class="text-white">
+                    <li>\(n_H, n_W\) and \(n_C\) are the height, width and number of channels of the hidden layer chosen, and appear in normalization term in the cost.</li>
+                    <li>For clarity, note that \(a^{(C)}\) and \(a^{(G)}\) are the 3D volumes corresponding to a hidden layer's activations.</li>
+                    <li>In order to compute the cost \(J_{content}(C,G)\), it is convenient to unroll these 3D volumes into a 2D matrix, as shown.</li>
+                </ul>
+
+                <div style="text-align: center;"><img src="{{ url_for('static', filename='img/NST_LOSS.png') }}" style="border-radius: 10px;max-width: 50%;margin-top: 20px;" loading="lazy">
+                    <p class="text-light"><br><strong>Figure 1:</strong> Unrolling a 3D volume into a 2D matrix</p>
+                </div>
+
+            </div>
+        </div>
         <hr style="color: #DBF227;">
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 text-light">
-            <h1 class="fs-3 fw-bolder text-white" style="text-align: left;">Computing the Content Cost Function</h1>
-            <p>One goal we should aim for when performing NST is for the content in generated image G to match the content of image C. A method to achieve this is to calculate the content cost function, which will be defined as:<br><br>\(J_{content}(C,G) =&nbsp;\frac{1}{4 \times n_H \times n_W \times n_C}\sum _{ \text{all entries}} (a^{(C)} - a^{(G)})^2\)</p>
-            <ul class="text-white">
-                <li>\(n_H, n_W\) and \(n_C\) are the height, width and number of channels of the hidden layer chosen, and appear in normalization term in the cost.</li>
-                <li>For clarity, note that \(a^{(C)}\) and \(a^{(G)}\) are the 3D volumes corresponding to a hidden layer's activations.</li>
-                <li>In order to compute the cost \(J_{content}(C,G)\), it is convenient to unroll these 3D volumes into a 2D matrix, as shown.</li>
-            </ul>
-        </div>
-        <div class="col-md-6">
-            <div style="text-align: center;"><img src="{{ url_for('static', filename='img/NST_LOSS.png') }}" style="border-radius: 10px;max-width: 90%;margin-top: 20px;" loading="lazy">
-                <p class="text-light"><br><strong>Figure 1:</strong> Unrolling a 3D volume into a 2D matrix</p>
+
+<div class="container text-light doc-container">
+        <!-- Toggle Button -->
+        <div><h1 class="fs-3 fw-bolder" style="text-align: left; cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#collapseStyleCost">4 - Style Cost Function <span class="arrow">&#x25BC;</span></h1></div>
+        
+        <!-- Collapsible Element -->
+        <div id="collapseStyleCost" class="collapse">
+            <div class="text-light">
+                <p>The style matrix is also called a "Gram matrix." The Gram matrix G of a set of vectors \((v_{1},\dots ,v_{n})\) is the matrix of dot products, whose entries are \({\displaystyle G_{ij} = v_{i}^T v_{j} = np.dot(v_{i}, v_{j})&nbsp;}\).&nbsp;<br><br>\(G_{ij}\) compares how similar \(v_i\) is to \(v_j\): if highly similar, we would expect them to have a large dot product, and thus for \(G_{ij}\) to be large.&nbsp;<br><br>\(\mathbf{G}_{gram} = \mathbf{A}_{unrolled} \mathbf{A}_{unrolled}^T\)</p>
+                <ul class="text-white">
+                    <li>The diagonal elements \(G_{(gram)ii}\) measure how "active" a filter \(i\) is. </li>
+                    <li><span style="color: rgb(248, 249, 250);">For example, suppose filter \(i\) is detecting vertical textures in the image. Then \(G_{(gram)ii}\) measures how common vertical textures are in the image as a whole.</span></li>
+                    <li><span style="color: rgb(248, 249, 250);">If \(G_{(gram)ii}\) is large, this means that the image has a lot of vertical texture.&nbsp;</span></li>
+                </ul>
+                <p>By capturing the prevalence of different types of features (\(G_{(gram)ii}\)), as well as how much different features occur together (\(G_{(gram)ij}\)), the Style matrix \(G_{gram}\) measures the style of an image.</p>
+                
+                <div style="text-align: center;"><img src="{{ url_for('static', filename='img/NST_GM.png') }}" style="border-radius: 10px;max-width: 50%;margin-top: 20px;" loading="lazy">
+                    <p class="text-light"><br><strong>Figure 2:</strong> Computing the Style matrix by multiplying the "unrolled" filter matrix with its transpose&nbsp;</p>
+                    <p class="text-light" style="text-align: left;"><br>The result is a matrix of dimension \((n_C,n_C)\) where \(n_C\) is the number of filters (channels). The value \(G_{(gram)i,j}\) measures how similar the activations of filter \(i\) are to the activations of filter \(j\).&nbsp;</p>
+                </div>
+
             </div>
         </div>
+        <hr style="color: #DBF227;">
     </div>
-    <hr style="color: #DBF227;">
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 text-light">
-            <h1 class="fs-3 fw-bolder text-white" style="text-align: left;">Computing the Style Cost Function</h1>
-            <p>The style matrix is also called a "Gram matrix." The Gram matrix G of a set of vectors \((v_{1},\dots ,v_{n})\) is the matrix of dot products, whose entries are \({\displaystyle G_{ij} = v_{i}^T v_{j} = np.dot(v_{i}, v_{j})&nbsp;}\).&nbsp;<br><br>\(G_{ij}\) compares how similar \(v_i\) is to \(v_j\): if highly similar, we would expect them to have a large dot product, and thus for \(G_{ij}\) to be large.&nbsp;<br><br>\(\mathbf{G}_{gram} = \mathbf{A}_{unrolled} \mathbf{A}_{unrolled}^T\)</p>
-            <ul class="text-white">
-                <li>The diagonal elements \(G_{(gram)ii}\) measure how "active" a filter \(i\) is. </li>
-                <li><span style="color: rgb(248, 249, 250);">For example, suppose filter \(i\) is detecting vertical textures in the image. Then \(G_{(gram)ii}\) measures how common vertical textures are in the image as a whole.</span></li>
-                <li><span style="color: rgb(248, 249, 250);">If \(G_{(gram)ii}\) is large, this means that the image has a lot of vertical texture.&nbsp;</span></li>
-            </ul>
-            <p>By capturing the prevalence of different types of features (\(G_{(gram)ii}\)), as well as how much different features occur together (\(G_{(gram)ij}\)), the Style matrix \(G_{gram}\) measures the style of an image.</p>
-        </div>
-        <div class="col-md-6">
-            <div style="text-align: center;"><img src="{{ url_for('static', filename='img/NST_GM.png') }}" style="border-radius: 10px;max-width: 90%;margin-top: 20px;" loading="lazy">
-                <p class="text-light"><br><strong>Figure 2:</strong> Computing the Style matrix by multiplying the "unrolled" filter matrix with its transpose&nbsp;</p>
-                <p class="text-light" style="text-align: left;"><br>The result is a matrix of dimension \((n_C,n_C)\) where \(n_C\) is the number of filters (channels). The value \(G_{(gram)i,j}\) measures how similar the activations of filter \(i\) are to the activations of filter \(j\).&nbsp;</p>
+
+<div class="container text-light doc-container">
+        <!-- Toggle Button -->
+        <div><h1 class="fs-3 fw-bolder" style="text-align: left; cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#collapseTotalCost">5 - Total Cost Minimization <span class="arrow">&#x25BC;</span></h1></div>
+
+        <!-- Collapsible Element -->
+        <div id="collapseTotalCost" class="collapse">
+            <div>
+                <p class="text-white">Minimize the distance between the Gram matrix of the "style" image S and the Gram matrix of the "generated" image G. For a single hidden layer \(a^{[l]}\), the corresponding style cost for this layer is defined as:<br><br>\(J_{style}^{[l]}(S,G) = \frac{1}{4 \times {n_C}^2 \times (n_H \times n_W)^2} \sum _{i=1}^{n_C}\sum_{j=1}^{n_C}(G^{(S)}_{(gram)i,j} - G^{(G)}_{(gram)i,j})^2\tag{2} \)</p>
+                <ul class="text-white">
+                    <li>\(G_{gram}^{(S)}\) Gram matrix of the "style" image.</li>
+                    <li>\(G_{gram}^{(G)}\) Gram matrix of the "generated" image.</li>
+                </ul>
+                <p class="text-white">\(J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)\)</p>
             </div>
         </div>
-    </div>
-    <hr style="color: #DBF227;">
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="fs-3 fw-bolder text-white" style="text-align: left;">Total Cost Minimization</h1>
-            <p class="text-white">Minimize the distance between the Gram matrix of the "style" image S and the Gram matrix of the "generated" image G. For a single hidden layer \(a^{[l]}\), the corresponding style cost for this layer is defined as:<br><br>\(J_{style}^{[l]}(S,G) = \frac{1}{4 \times {n_C}^2 \times (n_H \times n_W)^2} \sum _{i=1}^{n_C}\sum_{j=1}^{n_C}(G^{(S)}_{(gram)i,j} - G^{(G)}_{(gram)i,j})^2\tag{2} \)</p>
-            <ul class="text-white">
-                <li>\(G_{gram}^{(S)}\) Gram matrix of the "style" image.</li>
-                <li>\(G_{gram}^{(G)}\) Gram matrix of the "generated" image.</li>
-            </ul>
-            <p class="text-white">\(J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)\)</p>
-        </div>
-    </div>
-    <hr style="color: #DBF227;">
-</div>
-<div class="container py-4 py-xl-5">
-    <div class="row row-cols-1 row-cols-md-2">
-        <div class="col" style="border-top-style: none;border-top-color: #019587;border-right-style: none;border-right-color: #019587;border-bottom-style: none;border-bottom-color: #019587;border-left-style: none;border-left-color: #019587;">
-            <div class="text-start" style="color: #D6D58E;border-radius: 10px;max-width: 90%;border-style: none;border-top-style: none;border-right-style: none;border-bottom-style: none;border-bottom-color: #019587;border-left-style: none;"><code style="color: #D6D58E;border-radius: 10px;border-width: 1px;border-color: #019587;border-top-color: #019587;border-right-color: #019587;border-bottom-color: #019587;border-left-style: none;"><br><br><strong>def train_step(generated_image):</strong>&nbsp; <br>&nbsp; &nbsp; with tf.GradientTape() as tape:<br><br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute a_G as the vgg_model_outputs</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; a_G = vgg_model_outputs(generated_image)<br><br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute the style cost</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; J_style = compute_style_cost(a_S, a_G, STYLE_LAYERS)<br>&nbsp; &nbsp;<br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute the content cost</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; J_content = compute_content_cost(a_C, a_G)<br>&nbsp;<br><em><span style="color: var(--jp-mirror-editor-comment-color);">&nbsp; &nbsp; &nbsp; &nbsp; # Compute the total cost</span></em><br>&nbsp; &nbsp; &nbsp; &nbsp; J = total_cost(J_content, J_style, alpha, beta)<br>&nbsp; <br>&nbsp; grad = tape.gradient(J, generated_image)<br>&nbsp; optimizer.apply_gradients([(grad, generated_image)])<br><br>&nbsp; generated_image.assign(clip_0_1(generated_image))<br>&nbsp; return J<br><br>generated_image = tf.Variable(generated_image)<br><br>epochs = 2501<br>for i in range(epochs):<br>&nbsp; train_step(generated_image)</code></div>
-        </div>
-        <div class="col">
-            <div class="text-center"><img class="rounded w-100 h-100 fit-cover" style="min-height: 300px;max-width: 90%;border-radius: 10px;" src="{{ url_for('static', filename='img/nn.png') }}" width="636" height="300" loading="lazy">
-                <p class="text-light"><br><strong>Figure 3:</strong> <em>NST Architecture Workflow</em></p>
-            </div>
-        </div>
+        <hr style="color: #DBF227;">
     </div>
 </div>
+
 {% endblock %}

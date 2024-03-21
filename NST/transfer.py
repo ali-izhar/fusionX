@@ -4,8 +4,8 @@ from torch.optim import LBFGS
 import torch.nn.functional as F
 from torch.nn.utils import clip_grad_value_
 
-from vgg19 import Vgg19
-from utils import prepare_img, save_and_maybe_display, total_variation, gram_matrix, setup_paths
+from .vgg19 import Vgg19
+from .utils import prepare_img, save_and_maybe_display, total_variation, gram_matrix
 
 
 def prepare_model(device):
@@ -116,7 +116,7 @@ def neural_style_transfer(config):
 
             with torch.no_grad():
                 print(f'iter [{cnt:03}]\ttotal loss={total_loss.item():6.4f}\tcontent_loss={config["content_weight"] * content_loss.item():6.4f}\tstyle loss={config["style_weight"] * style_loss.item():6.4f}\ttv loss={config["tv_weight"] * tv_loss.item():6.4f}')
-                save_and_maybe_display(optimizing_img, cnt, config)
+                save_and_maybe_display(optimizing_img, cnt, config['num_iterations'], config['output_img_path'])
             
             cnt += 1
             return total_loss
@@ -127,28 +127,24 @@ def neural_style_transfer(config):
         if torch.isnan(optimizing_img).any():
             raise ValueError(f'NaN values encountered in the optimizing image at iteration {cnt}')
 
-    return os.path.join(config['output_img_dir'], config['output_img_name'])
+    return os.path.abspath(config['output_img_path'])
 
 
-def main():
-    config = {
-        'content_images_dir': './data/content-images',
-        'style_images_dir': './data/style-images',
-        'content_img_name': 'content.jpg',
-        'style_img_name': 'style.png',
-        'output_img_dir': './data/output-images',
-        'output_img_name': 'output.jpg',
-        'height': 500,
-        'content_weight': 1.0,
-        'style_weight': 30,
-        'tv_weight': 1e-1,
-        'num_iterations': 100,
-    }
-    config['img_format'] = (4, '.jpg')
-    setup_paths(config)
-    
-    results_path = neural_style_transfer(config)
-    print(f"Neural style transfer completed. Results saved to {results_path}")
+# def main():
+#     config = {
+#         'content_img_path': os.path.abspath('model/data/content-images/content.jpg'),
+#         'style_img_path': os.path.abspath('model/data/style-images/style.jpg'),
+#         'output_img_path': os.path.abspath('model/data/output-images/output.jpg'),
+#         'height': 500,
+#         'content_weight': 1.0,
+#         'style_weight': 30,
+#         'tv_weight': 1e-1,
+#         'num_iterations': 120,
+#     }
 
-if __name__ == "__main__":
-    main()
+#     config['img_format'] = (4, '.jpg') 
+#     results_path = neural_style_transfer(config)
+#     print(f"Neural style transfer completed. Results saved to {results_path}")
+
+# if __name__ == "__main__":
+#     main()

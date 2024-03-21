@@ -25,7 +25,7 @@
         <div class="row h-100">
             <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                 <div>
-                    <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Let the Fun Begin!</h2>
+                    <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Upload 2 Images to Merge!</h2>
                     <hr>
                 </div>
             </div>
@@ -34,43 +34,103 @@
 </section>
 
 <div class="container" style="text-align: center;">
-    <div class="row">
+    
+    <div class="row g4">
         <div class="col-md-6">
-            <div class="drop-zone" onclick="triggerFileInput('contentUpload')">
-                <img id="contentImage" class="img-fluid" style="border: none;">
-                <p id="contentPlaceholder" class="text-center text-white placeholder-text">Click or Drag & Drop to Upload Content Image</p>
+            <div class="drop-zone text-center p-4 bg-dark border border-2 border-light rounded" onclick="triggerFileInput('contentUpload')" style="cursor: pointer;">
+                <img id="contentImage" class="img-fluid mb-3" style="border: none;">
+                <p id="contentPlaceholder" class="text-white">Click or Drag & Drop to Upload <strong>Content Image</strong></p>
             </div>
-            <input id="contentUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'contentImage', 'contentPlaceholder')" name="contentUpload">
+            <input id="contentUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'contentImage', 'contentPlaceholder'); checkBothImagesLoaded();" name="contentUpload">
             <div class="studio-text-form">
                 <form action="{{ url_for('studio_bp.generate') }}" method="post">
-                    <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
+                    <div class="col-md-6"><input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
                         <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="drop-zone" onclick="triggerFileInput('styleUpload')">
-                <img id="styleImage" class="img-fluid" style="border: none;">
-                <p id="stylePlaceholder" class="text-center text-white placeholder-text">Click or Drag & Drop to Upload Style Image</p>
+            <div class="drop-zone text-center p-4 bg-dark border border-2 border-light rounded" onclick="triggerFileInput('styleUpload')" style="cursor: pointer;">
+                <img id="styleImage" class="img-fluid mb-3" style="border: none;">
+                <p id="stylePlaceholder" class="text-white">Click or Drag & Drop to Upload <strong>Style Image</strong></p>
             </div>
-            <input id="styleUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'styleImage', 'stylePlaceholder')" name="styleUpload">
+            <input id="styleUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'styleImage', 'stylePlaceholder'); checkBothImagesLoaded();" name="styleUpload">
             <div class="studio-text-form">
                 <form action="{{ url_for('studio_bp.generate') }}" method="post">
-                    <div class="col-md-6"><input class="bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" data-bs-theme="dark">
+                    <div class="col-md-6"><input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" data-bs-theme="dark">
                         <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div class="button-container">
-        <button class="btn" id="mergeButton" onclick="mergeImages()">
+    <hr style="color: #DBF227;">
+</div>
+
+<div class="button-container" id="mergeBlock" style="text-align: center; display: none;">
+    <form id="mergeForm" method="post">
+        <button class="btn" id="mergeButton" type="submit" onclick="mergeImages()">
             <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
                 <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
             </svg>
             <span class="text">Merge Images</span>
         </button>
-    </div>
+
+        <div class="container text-light doc-container" style="text-align: center;">
+            <!-- Toggle Button -->
+            <div><h1 class="fs-4 fw-bolder" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#nstDefaults">Change Default NST Settings<span class="arrow">&#x25BC;</span></h1></div>
+
+            <!-- Collapsible Element -->
+            <div id="nstDefaults" class="collapse">
+                <div class="card card-body bg-dark">
+                    <form>
+                        <div class="row g-3 align-items-end">
+                            <div class="col-sm">
+                                <label for="nstIterations" class="form-label">Iterations</label>
+                                <input type="number" name="nstIterations" class="form-control" id="nstIterations" value="10" min="10" max="120">
+                            </div>
+            
+                            <div class="col-sm">
+                                <label for="nstContentWeight" class="form-label">Content Weight</label>
+                                <input type="number" name="nstContentWeight" class="form-control" id="nstContentWeight" value="1.0" min="1.0" max="1e5">
+                            </div>
+            
+                            <div class="col-sm">
+                                <label for="nstStyleWeight" class="form-label">Style Weight</label>
+                                <input type="number" name="nstStyleWeight" class="form-control" id="nstStyleWeight" value="30" min="10" max="1e6">
+                            </div>
+            
+                            <div class="col-sm">
+                                <label for="nstTotalVariationWeight" class="form-label">Total Variation Weight</label>
+                                <input type="number" name="nstTotalVariationWeight" class="form-control" id="nstTotalVariationWeight" value="1e-1" min="1e-3" max="1">
+                            </div>
+            
+                            <div class="col-sm">
+                                <label for="nstImageHeight" class="form-label">Image Height</label>
+                                <input type="number" name="nstImageHeight" class="form-control" id="nstImageHeight" value="512" min="128" max="1024">
+                            </div>
+            
+                            <div class="col-sm">
+                                <label for="outputFileName" class="form-label">Output File Name</label>
+                                <input type="text" name="outputFileName" class="form-control" id="outputFileName" value="output" minlength="3" maxlength="20">
+                            </div>
+            
+                            <div class="col-sm">
+                                <label for="outputImageFormat" class="form-label">Output Image Format</label>
+                                <select name="outputImageFormat" class="form-select" id="outputImageFormat">
+                                    <option value=".jpg">JPG</option>
+                                    <option value=".png">PNG</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>            
+            
+        </div>
+    </form>
 </div>
+
+
 {% endblock %}

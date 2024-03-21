@@ -16,30 +16,15 @@
     </div>
 </section>
 
-<section>
-    <div class="merged-image-container">
-        <img id="resultImage" class="img-fluid" style="display: none; border: none;">
+<div class="container" style="text-align: center;">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-center">This is the merged image of the content and style images you uploaded. You can download the image by right-clicking on it and selecting "Save Image As".</p>
+        </div>
+        <div class="col-md-6">
+            <img id="mergedImage" class="img-fluid" src="" alt="Merged Image" style="display: none; border: none;">
+        </div>
     </div>
-</section>
+</div>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Retrieve the merged image data from local storage
-        const resultImageData = localStorage.getItem('resultImage');
-    
-        // Check if there is image data
-        if (resultImageData) {
-            const imgElement = document.getElementById('resultImage');
-            imgElement.src = resultImageData;
-            imgElement.style.display = 'block';
-    
-            // Clear the image data from local storage to avoid reuse
-            localStorage.removeItem('resultImage');
-        } else {
-            // Optionally, handle the case where no image data is found
-            console.error('No image data found in local storage.');
-        }
-    });
-</script>
 {% endblock %}
