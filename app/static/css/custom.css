@@ -178,10 +178,33 @@
 
 
 /* RESULT PAGE */
-#mergedImage {
-    width: 50%;
-    height: auto;
-    margin: 20px auto;
-    display: block;
-    border-radius: 10px;
+.image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+
+}
+.image-container img {
+    max-height: 600px;
+    max-width: 100%;
+    object-fit: contain;
+}
+.editor-options {
+    border: 2px solid #eef5d8;
+    border-radius: 15px;
+    padding: 20px;
+}
+.editor-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+}
+.editor-menu button:hover {
+    background: none;
+    color: #9FC131;
+    font-weight: bold;
 }

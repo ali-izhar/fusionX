@@ -8,76 +8,49 @@
         <div class="row h-100">
             <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                 <div>
-                    <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Merged Style!</h2>
-                    <hr>
+                    <h2 class="text-capitalize fs-1 fw-bolder mb-3" style="line-height: 2;letter-spacing: 5px;font-weight: bold;">Image Editor</h2>
+                    <hr style="border-top-color: #DBF227;">
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<div class="container py-5">
+<div class="container py-5 editor-menu">
     <div class="row">
-        <div class="col-md-6">
-            <div class="mb-4">
-                <h3 class="mb-3 text-center">Mini Photoshop</h3>
-                <hr style="border-top-color: #DBF227;">
-                
-                <!-- Enhancement Options -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-primary">Enhance</button>
-                    <div class="btn-group ms-2">
-                        <button type="button" class="btn btn-outline-primary" onclick="setEnhanceLevel('2x')">2x</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="setEnhanceLevel('3x')">3x</button>
-                        <button type="button" class="btn btn-outline-primary" onclick="setEnhanceLevel('4x')">4x</button>
+        <!-- Mini-Photoshop Options -->
+        <div class="col-md-2">
+            <div class="editor-options">
+                <div class="row mb-2">
+                    <div class="col">
+                        <button class="btn w-100">Enhance</button>
                     </div>
                 </div>
-                
-                <!-- Blur Options -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-secondary">Background Blur</button>
-                    <select class="form-select ms-2 w-auto" onchange="updateBlur(this.value)">
-                        <option value="low">Low</option>
-                        <option value="normal">Normal</option>
-                        <option value="strong">Strong</option>
-                    </select>
+                <div class="row mb-2">
+                    <div class="col">
+                        <button class="btn w-100">Brightness</button>
+                    </div>
                 </div>
-                
-                <!-- Crop (Placeholder for functionality activation) -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-info" onclick="applyCrop()">Crop</button>
-                    <!-- Additional UI elements can be added for crop specifics -->
+                <div class="row mb-2">
+                    <div class="col">
+                        <button class="btn w-100">Contrast</button>
+                    </div>
                 </div>
-                
-                <!-- Resize (Placeholder for functionality activation) -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-warning" onclick="applyResize()">Resize</button>
-                    <!-- Additional UI elements can be added for resize specifics -->
+                <div class="row mb-2">
+                    <div class="col">
+                        <button class="btn w-100">Saturation</button>
+                    </div>
                 </div>
-                
-                <!-- Brightness Options -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-dark">Brightness</button>
-                    <select class="form-select ms-2 w-auto" onchange="updateBrightness(this.value)">
-                        <option value="low">Low</option>
-                        <option value="normal">Normal</option>
-                        <option value="strong">Strong</option>
-                    </select>
-                </div>
-                
-                <!-- Contrast Options -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-success">Contrast</button>
-                    <select class="form-select ms-2 w-auto" onchange="updateContrast(this.value)">
-                        <option value="low">Low</option>
-                        <option value="normal">Normal</option>
-                        <option value="strong">Strong</option>
-                    </select>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn w-100">Filter</button>
+                    </div>
                 </div>
             </div>
-        </div>        
-        
-        <div class="col-md-6 d-flex justify-content-center align-items-center">
+        </div>
+
+        <!-- Image Display -->
+        <div class="col-md-10 d-flex justify-content-center align-items-center">
             <div class="image-container">
                 <!-- Display Merged Image -->
                 <img id="mergedImage" class="img-fluid" src="" alt="Merged Image">

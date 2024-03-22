@@ -21,6 +21,7 @@ def gallery():
 def docs():
     return render_template('docs.html')
 
+# Remove this route once finished working on page
 @main_bp.route('/result')
 def results():
     return render_template('result.html')
