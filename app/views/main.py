@@ -20,3 +20,7 @@ def gallery():
 @main_bp.route('/docs')
 def docs():
     return render_template('docs.html')
+
+@main_bp.route('/result')
+def results():
+    return render_template('result.html')

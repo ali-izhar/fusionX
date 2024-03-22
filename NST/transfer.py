@@ -115,7 +115,7 @@ def neural_style_transfer(config):
                 raise ValueError(f'NaN values encountered in the total loss at iteration {cnt}')
 
             with torch.no_grad():
-                print(f'iter [{cnt:03}]\ttotal loss={total_loss.item():6.4f}\tcontent_loss={config["content_weight"] * content_loss.item():6.4f}\tstyle loss={config["style_weight"] * style_loss.item():6.4f}\ttv loss={config["tv_weight"] * tv_loss.item():6.4f}')
+                # print(f'iter [{cnt:03}]\ttotal loss={total_loss.item():6.4f}\tcontent_loss={config["content_weight"] * content_loss.item():6.4f}\tstyle loss={config["style_weight"] * style_loss.item():6.4f}\ttv loss={config["tv_weight"] * tv_loss.item():6.4f}')
                 save_and_maybe_display(optimizing_img, cnt, config['num_iterations'], config['output_img_path'])
             
             cnt += 1

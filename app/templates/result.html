@@ -16,13 +16,72 @@
     </div>
 </section>
 
-<div class="container" style="text-align: center;">
+<div class="container py-5">
     <div class="row">
         <div class="col-md-6">
-            <p class="text-center">This is the merged image of the content and style images you uploaded. You can download the image by right-clicking on it and selecting "Save Image As".</p>
-        </div>
-        <div class="col-md-6">
-            <img id="mergedImage" class="img-fluid" src="" alt="Merged Image" style="display: none; border: none;">
+            <div class="mb-4">
+                <h3 class="mb-3 text-center">Mini Photoshop</h3>
+                <hr style="border-top-color: #DBF227;">
+                
+                <!-- Enhancement Options -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-primary">Enhance</button>
+                    <div class="btn-group ms-2">
+                        <button type="button" class="btn btn-outline-primary" onclick="setEnhanceLevel('2x')">2x</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="setEnhanceLevel('3x')">3x</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="setEnhanceLevel('4x')">4x</button>
+                    </div>
+                </div>
+                
+                <!-- Blur Options -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-secondary">Background Blur</button>
+                    <select class="form-select ms-2 w-auto" onchange="updateBlur(this.value)">
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="strong">Strong</option>
+                    </select>
+                </div>
+                
+                <!-- Crop (Placeholder for functionality activation) -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-info" onclick="applyCrop()">Crop</button>
+                    <!-- Additional UI elements can be added for crop specifics -->
+                </div>
+                
+                <!-- Resize (Placeholder for functionality activation) -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-warning" onclick="applyResize()">Resize</button>
+                    <!-- Additional UI elements can be added for resize specifics -->
+                </div>
+                
+                <!-- Brightness Options -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-dark">Brightness</button>
+                    <select class="form-select ms-2 w-auto" onchange="updateBrightness(this.value)">
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="strong">Strong</option>
+                    </select>
+                </div>
+                
+                <!-- Contrast Options -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-success">Contrast</button>
+                    <select class="form-select ms-2 w-auto" onchange="updateContrast(this.value)">
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="strong">Strong</option>
+                    </select>
+                </div>
+            </div>
+        </div>        
+        
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <div class="image-container">
+                <!-- Display Merged Image -->
+                <img id="mergedImage" class="img-fluid" src="" alt="Merged Image">
+            </div>
         </div>
     </div>
 </div>
