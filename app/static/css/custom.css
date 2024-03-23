@@ -116,6 +116,26 @@
     font-size: 16px;
     cursor: pointer;
 }
+.modal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-container .btn {
+    display: inline-block; /* Allows the button to have a specific width */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    border: 3px solid #0FC2C0;
+    border-radius: 30px;
+    color: #0FC2C0;
+    white-space: nowrap; /* Prevents the text from wrapping to a new line */
+}
+.modal-container .btn:hover {
+    background: none;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -182,22 +202,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
-
+    color: #fff;
 }
 .image-container img {
-    max-height: 600px;
+    max-height: 768px;
     max-width: 100%;
     object-fit: contain;
+    margin: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 .editor-options {
     border: 2px solid #eef5d8;
     border-radius: 15px;
     padding: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 .editor-menu button {
     background: none;
-    border: none;
     cursor: pointer;
     padding: 0;
     margin: 0;

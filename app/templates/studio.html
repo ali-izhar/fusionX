@@ -27,8 +27,10 @@
             <input id="contentUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'contentImage', 'contentPlaceholder'); checkBothImagesLoaded();" name="contentUpload">
             <div class="studio-text-form">
                 <form action="{{ url_for('studio_bp.generate') }}" method="post">
-                    <div class="col-md-6"><input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
-                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
+                    <div class="col-md-6">
+                        <input type="hidden" id="model_input" name="model_input" value="realistic-vision-v14"> 
+                        <input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
+                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-3 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
                     </div>
                 </form>
             </div>
@@ -42,27 +44,52 @@
             <div class="studio-text-form">
                 <form action="{{ url_for('studio_bp.generate') }}" method="post">
                     <div class="col-md-6"><input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" data-bs-theme="dark">
-                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-2 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
+                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-3 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <hr style="color: #DBF227;">
+    <p class="text-light">Select a Different Model to Generate Images</p>
 </div>
+
+
+<!-- Model Selection Modal -->
+<div class="modal fade" id="modelModal" tabindex="-1" aria-labelledby="modelModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-light" id="modelModalLabel">Text-to-Image Models</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                    {% for model in models %}
+                            <a class="list-group-item model-item" href="#" data-bs-dismiss="modal" data-model="{{ model.name }}" title="{{ model.description }}">{{ model.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container modal-container text-center">
+    <button class="btn model-button" type="button" data-bs-toggle="modal" data-bs-target="#modelModal">
+        <span id="modelButtonText">Stable Diffusion</span>
+        <svg id="arrowIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16" style="margin-left: 8px;">
+            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+        </svg>
+    </button>                                                          
+</div>
+
+<!-- center this hr -->
+<hr style="margin:20px; border-top: 3px solid var(--bs-light); width: 80%; margin-left: auto; margin-right: auto;">
 
 <div class="button-container" id="mergeBlock" style="text-align: center; display: none;">
     <form id="mergeForm" method="post">
-        <button class="btn" id="mergeButton" type="submit" onclick="mergeImages(event)">
-            <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
-                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
-            </svg>
-            <span class="text">Merge Images</span>
-        </button>
-
         <div class="container text-light doc-container" style="text-align: center;">
             <!-- Toggle Button -->
-            <div><h1 class="fs-4 fw-bolder" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#nstDefaults">Change Default NST Settings<span class="arrow">&#x25BC;</span></h1></div>
+            <div><h1 class="fs-4 fw-bolder" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#nstDefaults">Change Default <span style="color:chartreuse"><strong><u>NST</u></strong></span> Settings  <span class="arrow" style="color:brown">&#x25BC;</span></h1></div>
 
             <!-- Collapsible Element -->
             <div id="nstDefaults" class="collapse">
@@ -71,7 +98,7 @@
                         <div class="row g-3 align-items-end">
                             <div class="col-sm">
                                 <label for="nstIterations" class="form-label">Iterations</label>
-                                <input type="number" name="nstIterations" class="form-control" id="nstIterations" value="10" min="10" max="120">
+                                <input type="number" name="nstIterations" class="form-control" id="nstIterations" value="50" min="10" max="100">
                             </div>
             
                             <div class="col-sm">
@@ -110,8 +137,13 @@
                     </form>
                 </div>
             </div>            
-            
         </div>
+        <button class="btn" id="mergeButton" type="submit" onclick="mergeImages(event)">
+            <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
+                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+            </svg>
+            <span class="text"><strong>Merge Images</strong></span>
+        </button>
     </form>
 </div>
 

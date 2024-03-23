@@ -3,10 +3,11 @@ import logging
 import os
 import tempfile
 from flask import jsonify, request, Blueprint, render_template
-from NST import neural_style_transfer
+from nst import neural_style_transfer
 from openai import OpenAI
 from config import Config
-from .utils import (process_image_data, write_temp_file, cleanup_temp_files,
+
+from utils.nst_utils import (process_image_data, write_temp_file, cleanup_temp_files,
                     generate_unique_file_name, generate_image_with_dalle)
 
 client = OpenAI()
