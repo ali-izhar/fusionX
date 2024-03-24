@@ -83,18 +83,3 @@ def generate_unique_file_name(base_path, original_name, img_format):
         new_name = f"{name}_{counter}"
         counter += 1
     return new_name + img_format
-
-
-def generate_image_with_dalle(client, prompt, model="dall-e-3", quality="standard", n=1):
-    """Generate images using OpenAI's DALL-E model with the given prompt."""
-    try:
-        response = client.images.generate(
-            model=model,
-            prompt=prompt,
-            quality=quality,
-            n=n,
-        )
-        return response.data[0].url
-    except Exception as e:
-        logging.error(f"An error occurred while generating image with DALL-E: {e}")
-        raise e

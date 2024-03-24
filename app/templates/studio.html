@@ -25,12 +25,13 @@
                 <p id="contentPlaceholder" class="text-white">Click or Drag & Drop to Upload <strong>Content Image</strong></p>
             </div>
             <input id="contentUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'contentImage', 'contentPlaceholder'); checkBothImagesLoaded();" name="contentUpload">
+            <!-- Content Image Form -->
             <div class="studio-text-form">
-                <form action="{{ url_for('studio_bp.generate') }}" method="post">
+                <form id="form-content">
                     <div class="col-md-6">
-                        <input type="hidden" id="model_input" name="model_input" value="realistic-vision-v14"> 
-                        <input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" data-bs-theme="dark">
-                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-3 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
+                        <input type="hidden" id="model_input" name="model_input" value="realistic-vision-v14">
+                        <input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Content Image ..." name="prompt" id="prompt-content" data-bs-theme="dark">
+                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-3 border-success" id="generate-btn-content" type="button" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
                     </div>
                 </form>
             </div>
@@ -41,10 +42,13 @@
                 <p id="stylePlaceholder" class="text-white">Click or Drag & Drop to Upload <strong>Style Image</strong></p>
             </div>
             <input id="styleUpload" class="file-input" type="file" required="" accept="image/*" onchange="previewImage(event, 'styleImage', 'stylePlaceholder'); checkBothImagesLoaded();" name="styleUpload">
+            <!-- Style Image Form -->
             <div class="studio-text-form">
-                <form action="{{ url_for('studio_bp.generate') }}" method="post">
-                    <div class="col-md-6"><input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" data-bs-theme="dark">
-                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-3 border-success" type="submit" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
+                <form id="form-style">
+                    <div class="col-md-6">
+                        <input type="hidden" id="model_input" name="model_input" value="realistic-vision-v14">
+                        <input class="form-control form-control-lg bg-transparent border rounded-0 border-2" type="text" autocomplete="on" required="" minlength="10" maxlength="200" placeholder="Prompt to Generate Style Image ..." name="prompt" id="prompt-style" data-bs-theme="dark">
+                        <button class="btn btn-primary fs-6 fw-semibold border rounded-pill border-3 border-success" id="generate-btn-style" type="button" style="background: rgb(0,0,0);margin-top: 25px;margin-bottom: 25px;">Generate</button>
                     </div>
                 </form>
             </div>
@@ -75,7 +79,7 @@
 
 <div class="container modal-container text-center">
     <button class="btn model-button" type="button" data-bs-toggle="modal" data-bs-target="#modelModal">
-        <span id="modelButtonText">Stable Diffusion</span>
+        <span id="modelButtonText">Realistic Vision</span>
         <svg id="arrowIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16" style="margin-left: 8px;">
             <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
         </svg>

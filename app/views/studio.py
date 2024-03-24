@@ -6,13 +6,29 @@ from flask import jsonify, request, Blueprint, render_template
 from nst import neural_style_transfer
 from openai import OpenAI
 from config import Config
+from utils.generate import Model, ModelError
+from utils.nst_utils import (process_image_data, write_temp_file, 
+                             cleanup_temp_files, generate_unique_file_name)
 
-from utils.nst_utils import (process_image_data, write_temp_file, cleanup_temp_files,
-                    generate_unique_file_name, generate_image_with_dalle)
+
+studio_bp = Blueprint('studio_bp', __name__, url_prefix='/studio')
+
 
 client = OpenAI()
 client.api_key = os.environ.get('OPENAI_API_KEY')
-studio_bp = Blueprint('studio_bp', __name__, url_prefix='/studio')
+
+HF_API_KEY = os.environ.get('HF_API_KEY')
+HF_ENDPOINTS = {
+    'stable-diffusion-v15': os.getenv('STABLE_DIFFUSION_V15'),
+    'stable-diffusion-v21': os.getenv('STABLE_DIFFUSION_V21'),
+    'stable-diffusion-xl-base-1.0': os.getenv('STABLE_DIFFUSION_XL_BASE_1.0'),
+    'dreamlike-photo-real': os.getenv('DREAMLIKE_PHOTO_REAL'),
+    'dream-shaper': os.getenv('DREAM_SHAPER'),
+    'realistic-vision-v14': os.getenv('REALISTIC_VISION_V14'),
+    'nitro-diffusion': os.getenv('NITRO_DIFFUSION'),
+    'dreamlike-anime': os.getenv('DREAMLIKE_ANIME_V10'),
+    'anything-v5': os.getenv('ANYTHING_V5'),
+}
 
 
 @studio_bp.route('/result')
@@ -22,9 +38,27 @@ def result():
 
 @studio_bp.route('/generate', methods=['POST'])
 def generate():
-    prompt = request.form['prompt']
-    image_data = generate_image_with_dalle(client, prompt)
-    return render_template('result.html', image_data=image_data)
+    try:
+        data = request.get_json()
+        prompt = data.get('prompt', '')
+        if not prompt:
+            return jsonify({'error': 'Prompt is required'}), 400
+        
+        negative_prompt = data.get('negativePrompt', '')
+        guidance_scale = data.get('guidanceScale', 7)
+        inference_steps = data.get('inferenceSteps', 30)
+        height = data.get('height', 512)
+        width = data.get('width', 512)
+        model_name = data.get('model', 'realistic-vision-v14')
+
+        print(f"Model: {model_name}, Prompt: {prompt}, Negative Prompt: {negative_prompt}, Guidance Scale: {guidance_scale}, Inference Steps: {inference_steps}, Height: {height}, Width: {width}")
+
+        model = Model(HF_ENDPOINTS[model_name], prompt, negative_prompt, guidance_scale, inference_steps, height, width)
+        base64_image = model.generate()
+        return jsonify({'result': f"data:image/png;base64,{base64_image}"})
+    except ModelError as e:
+        logging.error(f"An error occurred: {e}")
+        return jsonify({'error': 'Failed to generate image'}), 500
 
 
 @studio_bp.route('/merge', methods=['POST'])
