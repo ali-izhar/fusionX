@@ -1,14 +1,19 @@
 import base64
 import logging
+from io import BytesIO
 import os
 import tempfile
-from flask import jsonify, request, Blueprint, render_template
+from flask import Blueprint, jsonify, render_template, request
 from nst import neural_style_transfer
 from openai import OpenAI
 from config import Config
+from utils.enhance_image import enhance_image
 from utils.generate import Model, ModelError
 from utils.nst_utils import (process_image_data, write_temp_file, 
                              cleanup_temp_files, generate_unique_file_name)
+
+
+
 
 
 studio_bp = Blueprint('studio_bp', __name__, url_prefix='/studio')
@@ -33,7 +38,29 @@ HF_ENDPOINTS = {
 
 @studio_bp.route('/result')
 def result():
-    return render_template('result.html')
+
+    # local file to b64
+    image_path = r"C:\Users\Michael\CS\sr_proj\artistic-vision - Copy\app\static\img\im2.jpg"
+    with open(image_path, "rb") as image_file:
+        encoded_string = "data:image/png;base64," + base64.b64encode(image_file.read()).decode('utf-8')
+    return render_template('result.html', temp = encoded_string)
+
+@studio_bp.route('/enhance', methods=['POST'])
+def enhance():
+    data = request.get_json()
+    content_data = data['input_image']  # base64 encoded string
+
+    try:
+        # get back b64 string
+        result_image = enhance_image(content_data)
+    except Exception as e:
+        logging.error(f"An error occured: {e}")
+        return jsonify({'error': 'Failed to enhance image'}), 500
+
+
+    return jsonify({
+        'result': f"data:image/png;base64,{result_image}"
+    })
 
 
 @studio_bp.route('/generate', methods=['POST'])

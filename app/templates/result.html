@@ -18,45 +18,67 @@
 
 <div class="container py-5 editor-menu">
     <div class="row">
-        <!-- Mini-Photoshop Options -->
         <div class="col-md-2">
             <div class="editor-options">
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Enhance</button>
+                        <button class="btn w-100" id="revertButton" onclick="revertImage()">Revert</button>
                     </div>
                 </div>
+
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Brightness</button>
+                        <button class="btn w-100" id="enhanceButton" onclick="enhanceImage()">Enhance</button>
                     </div>
                 </div>
+
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Contrast</button>
+                        <button class="btn w-100" id="brightnessButton">Brightness</button>
                     </div>
                 </div>
+
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Saturation</button>
+                        <button class="btn w-100" id="contrastButton">Contrast</button>
                     </div>
                 </div>
-                <div class="row">
+
+                <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Filter</button>
+                        <button class="btn w-100" id="saturationButton">Saturation</button>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <button class="btn w-100" id="filterButton">Filter</button>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <button class="btn w-100" id="cropZoomButton" onclick="toggleCropMenu()" data-toggle="0">Open Crop / Zoom</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Image Display -->
         <div class="col-md-10 d-flex justify-content-center align-items-center">
             <div class="image-container">
-                <!-- Display Merged Image -->
-                <img id="mergedImage" class="img-fluid" src="" alt="Merged Image">
+                <img id="mergedImage" class="img-fluid" src="{{ temp }}" alt="Merged Image">
             </div>
         </div>
-    </div>
+
+        <div class="cropMenu" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-md-2">
+                    <input type="text" id="cropWidth" placeholder="N/A" class="form-control bg-dark text-white rounded-pill border-2 mb-2" readonly>
+                    <input type="text" id="cropHeight" placeholder="N/A" class="form-control bg-dark text-white rounded-pill border-2 mb-2" readonly>
+                </div>
+                <button class="btn" id="applyCropButton" onclick="applyCrop()">Apply Crop</button>
+            </div>
+        </div>
 </div>
 
 {% endblock %}
