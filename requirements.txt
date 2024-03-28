@@ -10,3 +10,5 @@ Werkzeug==3.0.1
 torch==2.2.1+cu118
 torchaudio==2.2.1+cu118
 torchvision==0.17.1+cu118
+basicsr==1.4.2
+realesrgan==0.3.0

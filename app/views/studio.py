@@ -1,23 +1,19 @@
 import base64
 import logging
-from io import BytesIO
 import os
 import tempfile
+
 from flask import Blueprint, jsonify, render_template, request
-from nst import neural_style_transfer
 from openai import OpenAI
+
 from config import Config
+from nst import neural_style_transfer
 from utils.enhance_image import enhance_image
 from utils.generate import Model, ModelError
-from utils.nst_utils import (process_image_data, write_temp_file, 
+from utils.nst_utils import (process_image_data, write_temp_file,
                              cleanup_temp_files, generate_unique_file_name)
 
-
-
-
-
 studio_bp = Blueprint('studio_bp', __name__, url_prefix='/studio')
-
 
 client = OpenAI()
 client.api_key = os.environ.get('OPENAI_API_KEY')
@@ -37,8 +33,13 @@ HF_ENDPOINTS = {
 
 
 @studio_bp.route('/result')
-def result(mergedImage):
-    return render_template('result.html', mergedImage=mergedImage)
+def result():
+    # local file to b64
+    image_path = r"C:\\Users\\Michael\\CS\\sr_proj\\artistic-vision - Copy\\app\\static\\img\\im2.jpg"
+    with open(image_path, "rb") as image_file:
+        encoded_string = "data:image/png;base64," + base64.b64encode(image_file.read()).decode('utf-8')
+    return render_template('result.html', mergedImage = encoded_string)
+
 
 @studio_bp.route('/enhance', methods=['POST'])
 def enhance():
@@ -52,7 +53,6 @@ def enhance():
         logging.error(f"An error occured: {e}")
         return jsonify({'error': 'Failed to enhance image'}), 500
 
-
     return jsonify({
         'result': f"data:image/png;base64,{result_image}"
     })
@@ -65,7 +65,7 @@ def generate():
         prompt = data.get('prompt', '')
         if not prompt:
             return jsonify({'error': 'Prompt is required'}), 400
-        
+
         negative_prompt = data.get('negativePrompt', '')
         guidance_scale = data.get('guidanceScale', 7)
         inference_steps = data.get('inferenceSteps', 30)
@@ -73,7 +73,8 @@ def generate():
         width = data.get('width', 512)
         model_name = data.get('model', 'realistic-vision-v14')
 
-        print(f"Model: {model_name}, Prompt: {prompt}, Negative Prompt: {negative_prompt}, Guidance Scale: {guidance_scale}, Inference Steps: {inference_steps}, Height: {height}, Width: {width}")
+        print(
+            f"Model: {model_name}, Prompt: {prompt}, Negative Prompt: {negative_prompt}, Guidance Scale: {guidance_scale}, Inference Steps: {inference_steps}, Height: {height}, Width: {width}")
 
         model = Model(HF_ENDPOINTS[model_name], prompt, negative_prompt, guidance_scale, inference_steps, height, width)
         base64_image = model.generate()
@@ -96,7 +97,7 @@ def merge():
 
         # Create temporary files for processing
         with tempfile.NamedTemporaryFile(delete=False, suffix=f'.{content_extension}') as content_temp_file, \
-             tempfile.NamedTemporaryFile(delete=False, suffix=f'.{style_extension}') as style_temp_file:
+                tempfile.NamedTemporaryFile(delete=False, suffix=f'.{style_extension}') as style_temp_file:
 
             write_temp_file(content_temp_file, content_image_data)
             write_temp_file(style_temp_file, style_image_data)
@@ -107,7 +108,7 @@ def merge():
             # Close temporary files before cleanup
             content_temp_file.close()
             style_temp_file.close()
-            
+
             # Cleanup and return result
             cleanup_temp_files([content_temp_file.name, style_temp_file.name])
             return jsonify({'result': f"data:image/jpeg;base64,{result_image_base64}"})
