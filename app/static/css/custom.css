@@ -205,6 +205,9 @@
     color: #fff;
 }
 .image-container img {
+    min-width:640px;
+    min-height:360px;
+
     max-height: 768px;
     max-width: 100%;
     object-fit: contain;
@@ -228,8 +231,24 @@
     margin: 0;
     color: #fff;
 }
+
+.editor-menu button:disabled{
+    border: none;
+    color: grey;
+}
+
 .editor-menu button:hover {
     background: none;
     color: #9FC131;
     font-weight: bold;
+}
+
+#cropWidth,
+#cropHeight,
+#applyCropButton {
+    margin-bottom: 20px;
+}
+
+.cropMenu {
+    margin-top: 20px;
 }

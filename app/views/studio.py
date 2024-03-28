@@ -37,13 +37,8 @@ HF_ENDPOINTS = {
 
 
 @studio_bp.route('/result')
-def result():
-
-    # local file to b64
-    image_path = r"C:\Users\Michael\CS\sr_proj\artistic-vision - Copy\app\static\img\im2.jpg"
-    with open(image_path, "rb") as image_file:
-        encoded_string = "data:image/png;base64," + base64.b64encode(image_file.read()).decode('utf-8')
-    return render_template('result.html', temp = encoded_string)
+def result(mergedImage):
+    return render_template('result.html', mergedImage=mergedImage)
 
 @studio_bp.route('/enhance', methods=['POST'])
 def enhance():
