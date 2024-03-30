@@ -136,6 +136,47 @@
     background: none;
 }
 
+#modelModal .unique-card {
+    width: 32%; /* Adjust the width for three cards per view */
+    height: 350px; /* Adjust height as needed */
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+#modelModal .unique-card-img {
+    height: 220px; /* Adjust image height here */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+}
+
+#modelModal .card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#modelModal .card-title {
+    font-size: 1.25rem; /* Adjust title font size */
+    font-weight: bold;
+    color: white;
+}
+#modelModal .card-text {
+    font-size: 1rem; /* Adjust text font size */
+    color: #6c757d; /* Adjust text color */
+}
+#modelModal .badge {
+    background-color: #0FC2C0; /* Adjust badge background color */
+    color: white; /* Adjust badge text color */
+}
+#modelModal .carousel-inner {
+    display: flex;
+    align-items: center; /* Centers the cards vertically */
+}
+#modelModal .badge {
+    margin: 0.125rem; /* Space between badges */
+}
+
 .button-container {
     display: flex;
     justify-content: center;

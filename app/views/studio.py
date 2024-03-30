@@ -15,9 +15,9 @@ studio_bp = Blueprint('studio_bp', __name__, url_prefix='/studio')
 
 
 client = OpenAI()
-client.api_key = os.environ.get('OPENAI_API_KEY')
+client.api_key = os.getenv('OPENAI_API_KEY')
 
-HF_API_KEY = os.environ.get('HF_API_KEY')
+HF_API_KEY = os.getenv('HF_API_KEY')
 HF_ENDPOINTS = {
     'stable-diffusion-v15': os.getenv('STABLE_DIFFUSION_V15'),
     'stable-diffusion-v21': os.getenv('STABLE_DIFFUSION_V21'),
@@ -40,6 +40,8 @@ def result():
 def generate():
     try:
         data = request.get_json()
+        print(data)
+
         prompt = data.get('prompt', '')
         if not prompt:
             return jsonify({'error': 'Prompt is required'}), 400

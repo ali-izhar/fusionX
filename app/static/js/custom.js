@@ -199,25 +199,28 @@ function generateImage(event, promptId, imageId, placeholderId) {
 
 // Model Selection Popup Handling
 function handleModelSelectionPopup() {
-    const modelModal = document.getElementById('modelModal');
-    const modelButtons = document.querySelectorAll('.model-item');
+    const modelModalElement = document.getElementById('modelModal');
+    const modelCards = modelModalElement.querySelectorAll('.card');
 
-    modelButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            const modelName = button.dataset.model;
+    modelCards.forEach(card => {
+        card.addEventListener('click', (event) => {
+            const modelName = card.getAttribute('data-model'); // Or card.dataset.model;
             updateModelName(modelName);
         });
     });
-    
+
     function updateModelName(modelName) {
         const titleCaseModelName = modelName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
         const modelButtonText = document.getElementById('modelButtonText');
         modelButtonText.textContent = titleCaseModelName;
         const modelInput = document.getElementById('model_input');
-        modelInput.value = modelName;
-        const modelModal = new bootstrap.Modal(document.getElementById('modelModal'));
-        modelModal.hide();
+        if (modelInput) {
+            modelInput.value = modelName; // Make sure an element with id 'model_input' exists
+        }
+        const modelModal = bootstrap.Modal.getInstance(modelModalElement);
+        if (modelModal) {
+            modelModal.hide();
+        }
     }
 }
 

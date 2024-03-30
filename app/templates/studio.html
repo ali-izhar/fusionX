@@ -60,17 +60,41 @@
 
 <!-- Model Selection Modal -->
 <div class="modal fade" id="modelModal" tabindex="-1" aria-labelledby="modelModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-dark">
-                <h5 class="modal-title text-light" id="modelModalLabel">Text-to-Image Models</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-dark text-white">
             <div class="modal-body">
-                <div class="list-group">
-                    {% for model in models %}
-                            <a class="list-group-item model-item" href="#" data-bs-dismiss="modal" data-model="{{ model.name }}" title="{{ model.description }}">{{ model.title }}</a>
-                    {% endfor %}
+                <div id="CarouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% set chunk_size = 3 %}
+                        {% for group in models|batch(chunk_size, '&nbsp;') %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <div class="d-flex justify-content-center">
+                                    {% for model in group %}
+                                        <div class="card unique-card bg-dark text-dark mx-2" data-bs-dismiss="modal" data-model="{{ model.name }}">
+                                            <img src="{{ url_for('static', filename='img/models/' ~ model.name ~ '.jpg') }}" class="card-img-top unique-card-img">
+                                            <div class="card-body d-flex flex-column">
+                                                <h5 class="card-title">{{ model.title }}</h5>
+                                                <p class="card-text flex-fill">{{ model.description }}</p>
+                                                <div class="mt-auto">
+                                                    {% for keyword in model.keywords %}
+                                                        <span class="badge text-dark">{{ keyword }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#CarouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#CarouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -150,8 +174,6 @@
         </button>
     </form>
 </div>
-
-
 {% endblock %}
 
 {% block loader %}
