@@ -14,7 +14,21 @@
 .carousel-indicators li {
     font-size: 0;   /* Hide the indicator text i.e. numbers */
 }
-
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23fff" class="bi bi-chevron-right" viewBox="0 0 16 16"><path d="M5.646 8l4.647-4.646a.5.5 0 0 0-.708-.708l-5 5a.5.5 0 0 0 0 .708l5 5a.5.5 0 0 0 .708-.708L5.646 8z"/></svg>');
+}
+.carousel-control-next-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23fff" class="bi bi-chevron-left" viewBox="0 0 16 16"><path d="M10.354 8l-4.647-4.646a.5.5 0 0 1 .708-.708l5 5a.5.5 0 0 1 0 .708l-5 5a.5.5 0 0 1-.708-.708L10.354 8z"/></svg>');
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-size: 100%, 100%;
+    background-color: #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    margin: 10px;
+}
 
 /* GALLERY PAGE */
 .photos {
@@ -142,6 +156,7 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    background: linear-gradient(to top right, rgb(41, 37, 39), rgb(5, 92, 63));
 }
 
 #modelModal .unique-card-img {

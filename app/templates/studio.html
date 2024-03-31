@@ -70,7 +70,7 @@
                             <div class="carousel-item {% if loop.first %}active{% endif %}">
                                 <div class="d-flex justify-content-center">
                                     {% for model in group %}
-                                        <div class="card unique-card bg-dark text-dark mx-2" data-bs-dismiss="modal" data-model="{{ model.name }}">
+                                        <div class="card unique-card text-dark mx-2" data-bs-dismiss="modal" data-model="{{ model.name }}">
                                             <img src="{{ url_for('static', filename='img/models/' ~ model.name ~ '.jpg') }}" class="card-img-top unique-card-img">
                                             <div class="card-body d-flex flex-column">
                                                 <h5 class="card-title">{{ model.title }}</h5>
