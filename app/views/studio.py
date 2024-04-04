@@ -4,7 +4,7 @@ import os
 import tempfile
 from flask import jsonify, request, Blueprint, render_template
 from nst import neural_style_transfer
-from openai import OpenAI
+from editor import enhance_image
 from config import Config
 from utils.generate import Model, ModelError
 from utils.nst_utils import (process_image_data, write_temp_file, 
@@ -13,9 +13,6 @@ from utils.nst_utils import (process_image_data, write_temp_file,
 
 studio_bp = Blueprint('studio_bp', __name__, url_prefix='/studio')
 
-
-client = OpenAI()
-client.api_key = os.getenv('OPENAI_API_KEY')
 
 HF_API_KEY = os.getenv('HF_API_KEY')
 HF_ENDPOINTS = {
@@ -34,6 +31,25 @@ HF_ENDPOINTS = {
 @studio_bp.route('/result')
 def result():
     return render_template('result.html')
+
+
+@studio_bp.route('/enhance', methods=['POST'])
+def enhance():
+    data = request.get_json()
+    if not data or 'input_image' not in data:
+        return jsonify({'error': 'Missing input_image in request'}), 400
+
+    content_data = data['input_image']
+
+    try:
+        result_image = enhance_image(content_data)
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return jsonify({'error': 'Failed to enhance image'}), 500
+
+    return jsonify({
+        'result': f"data:image/png;base64,{result_image}"
+    })
 
 
 @studio_bp.route('/generate', methods=['POST'])

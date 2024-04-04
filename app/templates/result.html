@@ -19,44 +19,244 @@
 <div class="container py-5 editor-menu">
     <div class="row">
         <!-- Mini-Photoshop Options -->
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="editor-options">
+                <!-- Option buttons -->
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Enhance</button>
-                    </div>
-                </div>
-                <div class="row mb-2">
-                    <div class="col">
-                        <button class="btn w-100">Brightness</button>
+                        <button class="btn w-100" id="revertButton" onclick="revertImage()" disabled>Revert</button>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Contrast</button>
+                        <button class="btn w-100" id="enhanceButton" onclick="enhanceImage()">Enhance</button>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">
-                        <button class="btn w-100">Saturation</button>
+                        <button class="btn w-100" id="cropZoomButton">Crop & Zoom</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn w-100">Filter</button>
-                    </div>
-                </div>
+            </div>
+
+            <!-- Crop Menu (Hidden initially) -->
+            <div class="cropMenu" style="display: none;">
+                <input type="text" id="cropWidth" placeholder="N/A"
+                       class="form-control bg-dark text-white rounded-pill border-2 mb-2" readonly>
+                <input type="text" id="cropHeight" placeholder="N/A"
+                       class="form-control bg-dark text-white rounded-pill border-2 mb-2" readonly>
             </div>
         </div>
 
-        <!-- Image Display -->
-        <div class="col-md-10 d-flex justify-content-center align-items-center">
-            <div class="image-container">
-                <!-- Display Merged Image -->
+        <!-- Image Display and Download Button -->
+        <div class="col-md-9 d-flex flex-column align-items-center">
+            <!-- Display Merged Image -->
+            <div class="image-container mb-3">
                 <img id="mergedImage" class="img-fluid" src="" alt="Merged Image">
             </div>
+            <!-- Download Button -->
+            <button id="confirmButton" class="btn" type="submit" onclick="saveImage()">Download</button>
         </div>
     </div>
 </div>
 
 {% endblock %}
+
+{% block loader %}
+        <div class="loader-overlay" id="loader-overlay" style="display: none;">
+
+            <div class="socket">
+                <div class="gel center-gel">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c1 r1">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c2 r1">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c3 r1">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c4 r1">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c5 r1">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c6 r1">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+
+                <div class="gel c7 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+
+                <div class="gel c8 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c9 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c10 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c11 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c12 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c13 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c14 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c15 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c16 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c17 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c18 r2">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c19 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c20 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c21 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c22 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c23 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c24 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c25 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c26 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c28 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c29 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c30 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c31 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c32 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c33 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c34 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c35 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c36 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+                <div class="gel c37 r3">
+                    <div class="hex-brick h1"></div>
+                    <div class="hex-brick h2"></div>
+                    <div class="hex-brick h3"></div>
+                </div>
+            </div>
+            <div class="text-center text-light loader-text">
+                <h3 class="fs-4 fw-bolder">Enhancing ...</h3>
+            </div>
+
+        </div>
+    {% endblock %}

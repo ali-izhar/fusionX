@@ -5,6 +5,7 @@ opencv-python==4.9.0.80
 openai==1.13.3
 pillow==10.2.0
 python-dotenv==1.0.1
+realesrgan==0.3.0
 requests==2.31.0
 Werkzeug==3.0.1
 torch==2.2.1+cu118

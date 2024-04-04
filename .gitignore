@@ -160,6 +160,7 @@ cython_debug/
 #.idea/
 design/
 model/
+models/
 notebooks/
 notebooks/images
 NST/model/

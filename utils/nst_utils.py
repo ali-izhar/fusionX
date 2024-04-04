@@ -3,6 +3,8 @@ import base64
 import requests
 import time
 import os
+from io import BytesIO
+from PIL import Image
 
 
 def is_base64(data):
@@ -32,6 +34,19 @@ def convert_to_base64(url):
     except Exception as e:
         logging.error(f"An error occurred while converting image URL to base64: {e}")
     return None
+
+
+def base64_to_PIL(b64_string):
+    """Converts base64 string to PIL Image."""
+    if not is_base64(b64_string):
+        try:
+            b64_string = convert_to_base64(b64_string)
+        except Exception as e:
+            logging.error("enhancer failed to convert")
+            raise
+
+    img_data = base64.b64decode(b64_string.split(',')[1])
+    return Image.open(BytesIO(img_data))
 
 
 def process_image_data(image_data):
