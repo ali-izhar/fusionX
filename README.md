@@ -2,88 +2,71 @@
 
 # Fusion Xperience :fire: :zap:
 
-<u>**FusionX**</u> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
+**FusionX** is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
 
+![fusionX App](./screenshots/index.jpg)
 
-<p style="text-align: center;">
-   <img src="./app/static/img/nst.jpg" alt="fusionX Header" width="100%"/>
-   <br>
-   <a href="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee" target="_blank">Image Source</a>
-</p>
+## :sparkles: Repository Vision
 
+The goal of this repository is to provide a simple and easy-to-use web application for neural style transfer. The application is built using the [Flask](https://flask.palletsprojects.com/en/2.0.x/) framework and the [PyTorch](https://pytorch.org/) library. The neural style transfer model is based on the [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576) paper by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge.
 
-<details>
-   <summary>Repository Vision</summary>
-   <p><br>
-      The goal of this repository is to provide a simple and easy-to-use web application for neural style transfer. The application is built using the <a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a> framework and the <a href="https://pytorch.org/">PyTorch</a> library. The neural style transfer model is based on the [<a href="https://arxiv.org/abs/1508.06576">A Neural Algorithm of Artistic Style</a>] paper by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge.<br>
-   </p>
-</details>
+## :bookmark_tabs: Table of Contents
 
-<details>
-   <summary>Table of Contents</summary>
-   <p>
-
-   - [FusionX](#artistic-vision-art-eyes)
-      - [Features](#features)
-      - [Application Preview](#application-preview)
-      - [Getting Started](#getting-started)
-         - [Prerequisites](#prerequisites)
-         - [Installation](#installation)
-      - [Contributing](#contributing)
-      - [License](#license)
-   </p>
-</details>
+- [Features](#features-sparkles)
+- [Application Preview](#application-preview-camera)
+- [Getting Started](#getting-started-rocket)
+  - [Prerequisites](#prerequisites-clipboard)
+  - [Installation](#installation-computer)
+- [Contributing](#contributing-handshake)
+- [License](#license-page_facing_up)
 
 ## Features :sparkles:
 
-- [x] Upload or Generate content images
-   - [x] Upload from your device
-   - [x] Generate using Hugging Face Text-to-Image API
-- [x] Apply styles to content images
-   - [x] Upload from your device
-   - [x] Choose from a gallery of pre-loaded styles
-   - [x] Generate using Hugging Face Text-to-Image API
-- [x] Customize the style transfer process with advanced options
-   - [x] Adjust the style weight
-   - [x] Adjust the content weight
-   - [x] Adjust the total variation weight
-   - [x] Adjust the number of iterations
-- [x] Use the Editor to fine-tune the stylized image
-   - [x] Crop and Resize the image
-   - [x] Super Resolution using Real-ESRGAN
-- [x] Download the stylized image
+- Upload or Generate content images
+  - Upload from your device
+  - Generate using Hugging Face Text-to-Image API
+- Apply styles to content images
+  - Upload from your device
+  - Choose from a gallery of pre-loaded styles
+  - Generate using Hugging Face Text-to-Image API
+- Customize the style transfer process with advanced options
+  - Adjust the style weight
+  - Adjust the content weight
+  - Adjust the total variation weight
+  - Adjust the number of iterations
+- Use the Editor to fine-tune the stylized image
+  - Crop and Resize the image
+  - Super Resolution using Real-ESRGAN
+- Download the stylized image
 
-## Application Preview :camera:
-
-<p style="text-align: center;">
-The FusionX web application is live at <a href="https://fusionx.herokuapp.com/">https://fusionx.herokuapp.com/</a> <br>
-   <img src="./screenshots/index.jpg" alt="FusionX Home Page" width="100%"/>
-</p>
-
-<p style="text-align: center;">
-The Studio page allows you to upload content and style images. <br>
-   <img src="./screenshots/studio.jpg" alt="Upload Image" width="100%"/>
-</p>
-
-<p style="text-align: center;">
-The Studio page also allows you to generate content and style images using the Hugging Face Text-to-Image API. <br>
-   <img src="./screenshots/studio_modal.jpg" alt="Generate Image" width="100%"/>
-</p>
-
-<p style="text-align: center;">
-The Gallery page showcases a collection of pre-loaded style images that can be applied to your content images. <br>
-   <img src="./screenshots/gallery.jpg" alt="Gallery" width="100%"/>
-</p>
-
-<p style="text-align: center;">
-Once both the content and style images are selected, you can customize the style transfer process using advanced options. <br>
-   <img src="./screenshots/studio_merge.jpg" alt="Advanced Options" width="100%"/>
-</p>
-
-<p style="text-align: center;">
-The Editor page allows you to fine-tune the stylized image by cropping, resizing, and enhancing the image. <br>
-   <img src="./screenshots/editor.jpg" alt="Editor" width="100%"/>
-</p>
+<table>
+<tr>
+    <td>
+        The Studio page allows you to upload content and style images.<br>
+        <img src="./screenshots/studio.jpg" alt="Upload Image" width="100%"/>
+    </td>
+    <td>
+        The Studio page also allows you to generate content and style images using the Hugging Face Text-to-Image API.<br>
+        <img src="./screenshots/studio_modal.jpg" alt="Generate Image" width="100%"/>
+    </td>
+</tr>
+<tr>
+    <td>
+        The Gallery page showcases a collection of pre-loaded style images that can be applied to your content images.<br>
+        <img src="./screenshots/gallery.jpg" alt="Gallery" width="100%"/>
+    </td>
+    <td>
+        Once both the content and style images are selected, you can customize the style transfer process using advanced options.<br>
+        <img src="./screenshots/studio_merge.jpg" alt="Advanced Options" width="100%"/>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        The Editor page allows you to fine-tune the stylized image by cropping, resizing, and enhancing the image.<br>
+        <img src="./screenshots/editor.jpg" alt="Editor" width="100%"/>
+    </td>
+</tr>
+</table>
 
 
 ## Getting Started :rocket:
