@@ -16,6 +16,7 @@ The goal of this repository is to provide a simple and easy-to-use web applicati
 - [Application Preview](#application-preview-camera)
 - [Getting Started](#getting-started-rocket)
   - [Prerequisites](#prerequisites-clipboard)
+  - [Environment Variables](#environment-variables-key)
   - [Installation](#installation-computer)
 - [Contributing](#contributing-handshake)
 - [License](#license-page_facing_up)
@@ -38,6 +39,8 @@ The goal of this repository is to provide a simple and easy-to-use web applicati
   - Crop and Resize the image
   - Super Resolution using Real-ESRGAN
 - Download the stylized image
+
+## Application Preview :camera:
 
 <table align="center" style="border-collapse: collapse; width: 100%;" cellpadding="0" cellspacing="0">
     <tr>
@@ -69,14 +72,32 @@ The goal of this repository is to provide a simple and easy-to-use web applicati
 </table>
 
 
-
-
 ## Getting Started :rocket:
 
 #### Prerequisites :clipboard:
 
 - Python 3.9 or higher
 - Torch
+
+#### Environment Variables :key:
+
+Create a `.env` file in the root directory of the project and add the following environment variables:
+
+```python
+SECRET_KEY="your_secret_key"
+HF_API_KEY="your_hugging_face_api_key"
+
+# Hugging Face Text-to-Image API Models that fusionX uses
+STABLE_DIFFUSION_V15="https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5"
+STABLE_DIFFUSION_V21="https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1"
+STABLE_DIFFUSION_XL_BASE_1.0="https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
+ANYTHING_V5="https://api-inference.huggingface.co/models/stablediffusionapi/anything-v5"
+DREAMLIKE_PHOTO_REAL="https://api-inference.huggingface.co/models/dreamlike-art/dreamlike-photoreal-2.0"
+DREAM_SHAPER="https://api-inference.huggingface.co/models/Lykon/DreamShaper"
+NITRO_DIFFUSION="https://api-inference.huggingface.co/models/nitrosocke/Nitro-Diffusion"
+DREAMLIKE_ANIME_V10="https://api-inference.huggingface.co/models/dreamlike-art/dreamlike-anime-1.0"
+REALISTIC_VISION_V14="https://api-inference.huggingface.co/models/SG161222/Realistic_Vision_V1.4"
+```
 
 #### Installation :computer:
 ```
