@@ -5,7 +5,7 @@
 <u>**FusionX**</u> is a Flask-based web application that brings the power of neural style transfer to your fingertips. Transform ordinary images into extraordinary pieces of art by applying the styles of famous paintings.
 
 
-<p align="center">
+<p style="text-align: center;">
    <img src="./app/static/img/nst.jpg" alt="fusionX Header" width="100%"/>
    <br>
    <a href="https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-neural-style-transfer-ef88e46697ee" target="_blank">Image Source</a>
@@ -25,6 +25,7 @@
 
    - [FusionX](#artistic-vision-art-eyes)
       - [Features](#features)
+      - [Application Preview](#application-preview)
       - [Getting Started](#getting-started)
          - [Prerequisites](#prerequisites)
          - [Installation](#installation)
@@ -51,6 +52,39 @@
    - [x] Crop and Resize the image
    - [x] Super Resolution using Real-ESRGAN
 - [x] Download the stylized image
+
+## Application Preview :camera:
+
+<p style="text-align: center;">
+The FusionX web application is live at <a href="https://fusionx.herokuapp.com/">https://fusionx.herokuapp.com/</a> <br>
+   <img src="./screenshots/index.jpg" alt="FusionX Home Page" width="100%"/>
+</p>
+
+<p style="text-align: center;">
+The Studio page allows you to upload content and style images. <br>
+   <img src="./screenshots/studio.jpg" alt="Upload Image" width="100%"/>
+</p>
+
+<p style="text-align: center;">
+The Studio page also allows you to generate content and style images using the Hugging Face Text-to-Image API. <br>
+   <img src="./screenshots/studio_modal.jpg" alt="Generate Image" width="100%"/>
+</p>
+
+<p style="text-align: center;">
+The Gallery page showcases a collection of pre-loaded style images that can be applied to your content images. <br>
+   <img src="./screenshots/gallery.jpg" alt="Gallery" width="100%"/>
+</p>
+
+<p style="text-align: center;">
+Once both the content and style images are selected, you can customize the style transfer process using advanced options. <br>
+   <img src="./screenshots/studio_merge.jpg" alt="Advanced Options" width="100%"/>
+</p>
+
+<p style="text-align: center;">
+The Editor page allows you to fine-tune the stylized image by cropping, resizing, and enhancing the image. <br>
+   <img src="./screenshots/editor.jpg" alt="Editor" width="100%"/>
+</p>
+
 
 ## Getting Started :rocket:
 
