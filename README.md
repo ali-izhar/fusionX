@@ -39,34 +39,43 @@ The goal of this repository is to provide a simple and easy-to-use web applicati
   - Super Resolution using Real-ESRGAN
 - Download the stylized image
 
-<table>
-<tr>
-    <td>
-        The Studio page allows you to upload content and style images.<br>
-        <img src="./screenshots/studio.jpg" alt="Upload Image" width="100%"/>
-    </td>
-    <td>
-        The Studio page also allows you to generate content and style images using the Hugging Face Text-to-Image API.<br>
-        <img src="./screenshots/studio_modal.jpg" alt="Generate Image" width="100%"/>
-    </td>
-</tr>
-<tr>
-    <td>
-        The Gallery page showcases a collection of pre-loaded style images that can be applied to your content images.<br>
-        <img src="./screenshots/gallery.jpg" alt="Gallery" width="100%"/>
-    </td>
-    <td>
-        Once both the content and style images are selected, you can customize the style transfer process using advanced options.<br>
-        <img src="./screenshots/studio_merge.jpg" alt="Advanced Options" width="100%"/>
-    </td>
-</tr>
-<tr>
-    <td colspan="2">
-        The Editor page allows you to fine-tune the stylized image by cropping, resizing, and enhancing the image.<br>
-        <img src="./screenshots/editor.jpg" alt="Editor" width="100%"/>
-    </td>
-</tr>
+<table align="center" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+    <tr>
+        <td align="center" style="padding: 10px;">
+            <p>The Studio page allows you to upload content and style images.<br>
+            <img src="./screenshots/studio.jpg" alt="Upload Image" style="max-width:100%;"/>
+            </p>
+        </td>
+        <td align="center" style="padding: 10px;">
+            <p>The Studio page also allows you to generate content and style images using the Hugging Face Text-to-Image API.<br>
+            <img src="./screenshots/studio_modal.jpg" alt="Generate Image" style="max-width:100%;"/>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" style="padding: 10px;">
+            <p>The Gallery page showcases a collection of pre-loaded style images that can be applied to your content images.<br>
+            <img src="./screenshots/gallery.jpg" alt="Gallery" style="max-width:100%;"/>
+            </p>
+        </td>
+        <td align="center" style="padding: 10px;">
+            <p>Once both the content and style images are selected, you can customize the style transfer process using advanced options.<br>
+            <img src="./screenshots/studio_merge.jpg" alt="Advanced Options" style="max-width:100%;"/>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center" style="padding: 10px;">
+            <p>The Editor page allows you to fine-tune the stylized image by cropping, resizing, and enhancing the image.<br>
+            <img src="./screenshots/editor.jpg" alt="Editor" style="max-width:100%;"/>
+            </p>
+        </td>
+        <td align="center" style="padding: 10px;">
+            <p>Once you are satisfied with the stylized image, you can download it to your device.<br>
+         </td>
+    </tr>
 </table>
+
 
 
 ## Getting Started :rocket:
