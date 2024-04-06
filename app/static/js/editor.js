@@ -56,7 +56,6 @@ const revertImage = () => {
 
 const enhanceImage = () => {
     document.getElementById('loader-overlay').style.display = 'block';
-    saveCurrentState();
     const input_image = document.getElementById('mergedImage').src;
 
     fetch('/studio/enhance', {
@@ -66,11 +65,19 @@ const enhanceImage = () => {
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById('mergedImage').src = data.result;
         document.getElementById('loader-overlay').style.display = 'none';
+        if ('error' in data && !data.was_enhanced) {
+            // Show a popup if the image is already enhanced
+            alert("This image is already enhanced.");
+        } else {
+            document.getElementById('mergedImage').src = data.result;
+        }
     })
-    .catch(error => console.error('Error:', error));
-}
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('loader-overlay').style.display = 'none';
+    });
+};
 
 const openCropper = () => {
     const image = document.getElementById('mergedImage');

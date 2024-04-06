@@ -1,3 +1,3 @@
-from .enhance import enhance_image
+from .enhance import enhance_image, initialize_upsampler
 
-__all__ = ['enhance_image']
+__all__ = ['enhance_image', 'initialize_upsampler']
