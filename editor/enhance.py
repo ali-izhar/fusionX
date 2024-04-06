@@ -29,7 +29,7 @@ def initialize_upsampler():
     except FileNotFoundError:
         print("RealESRGAN weights not found, downloading...")
         download_model(model_path, 'https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth')
-        upsampler = RealESRGANer(scale=4, model_path=model_path, model=model, tile=0, tile_pad=10, pre_pad=0, half=False)
+        upsampler = RealESRGANer(scale=2, model_path=model_path, model=model, tile=0, tile_pad=10, pre_pad=0, half=False)
     except Exception as e:
         print(f"An error occurred: {e}")
         raise
