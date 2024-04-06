@@ -18,8 +18,11 @@ The goal of this repository is to provide a simple and easy-to-use web applicati
   - [Prerequisites](#prerequisites-clipboard)
   - [Environment Variables](#environment-variables-key)
   - [Installation](#installation-computer)
+    - [For Mac/Unix Users](#for-macunix-users-shell)
+    - [For Windows Users](#for-windows-users-window)
 - [Contributing](#contributing-handshake)
 - [License](#license-page_facing_up)
+
 
 ## Features :sparkles:
 
@@ -119,6 +122,55 @@ pip install -r requirements.txt
 # 6. Run the application
 python run.py
 ```
+
+## For Mac/Unix Users :shell:
+
+To set up your environment and run the application on Mac or Unix systems, follow these steps:
+
+1. **Create the Install Script**: Create a file named `install.sh` in the root directory of the project. This script will contain all the necessary commands to install your project's dependencies.
+
+    ```bash
+    #!/bin/bash
+    
+    # Install common dependencies
+    pip install -r requirements.txt
+    
+    # Install PyTorch with CUDA support
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+    ```
+
+2. **Make the Script Executable**: Run the following command in your terminal to make the script executable.
+
+    ```bash
+    chmod +x install.sh
+    ```
+
+3. **Execute the Install Script**: Now, run the script to install your dependencies.
+
+    ```bash
+    ./install.sh
+    ```
+
+## For Windows Users :window:
+
+Windows users should follow these steps to prepare their environment and run the application:
+
+1. **Create the Install Script**: Create a file named `install.ps1` in the root directory of the project. This PowerShell script will install the necessary dependencies for the project.
+
+    ```powershell
+    # Install common dependencies
+    pip install -r .\requirements.txt
+    
+    # Install PyTorch with CUDA support
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+    ```
+
+2. **Execute the Install Script**: Open PowerShell as an administrator, navigate to the project's root directory, and run the script with the following command:
+
+    ```powershell
+    Powershell -ExecutionPolicy Bypass -File .\install.ps1
+    ```
+
 
 ## Contributing :handshake:
 
