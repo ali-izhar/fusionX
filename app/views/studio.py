@@ -2,7 +2,7 @@ import base64
 import logging
 import os
 import tempfile
-from flask import jsonify, request, Blueprint, render_template
+from flask import jsonify, request, Blueprint, render_template, current_app
 from nst import neural_style_transfer
 from editor import enhance_image
 from config import Config
@@ -42,13 +42,17 @@ def enhance():
     content_data = data['input_image']
 
     try:
-        result_image = enhance_image(content_data)
+        upsampler = current_app.upsampler
+        result_image, was_enhanced = enhance_image(content_data, upsampler)
+        if not was_enhanced:
+            return jsonify({'error': 'Image is already enhanced', 'was_enhanced': False}), 200
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         return jsonify({'error': 'Failed to enhance image'}), 500
 
     return jsonify({
-        'result': f"data:image/png;base64,{result_image}"
+        'result': f"data:image/png;base64,{result_image}",
+        'was_enhanced': True
     })
 
 
