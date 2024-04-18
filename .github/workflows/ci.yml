@@ -1,0 +1,36 @@
+name: Continuous Integration
+
+# Triggered on push and pull requests to the main branch in the repo
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Use checkout GitHub Action to clone repo code onto the machine
+      - name: Checkout code
+        uses: actions/checkout@v3  # Updated to use the latest version
+        with:
+          node-version: '20'
+
+      # Set up a Python env using the specified version
+      - name: Set up Python
+        uses: actions/setup-python@v3  # Updated to use the latest version
+        with:
+          python-version: '3.11'
+          node-version: '20'
+
+      # Install dependencies using pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run tests. Replace `test_script.py` with your actual test script or command.
+      - name: Run tests
+        run: |
+          python -m unittest discover -s tests
